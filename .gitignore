@@ -1,0 +1,5 @@
+.DS_Store
+Thumbs.db
+.fuse_hidden*
+*.plugin
+*.zip
