@@ -25,7 +25,7 @@ The same task can deserve a different pick depending on what the tokens draw on.
 
 | Situation | How to tell | Use |
 | --- | --- | --- |
-| 1. Fable is included in the plan's weekly limit: Max, Ultra, premium seats on Team, and premium seats on legacy seat-based Enterprise plans | The usage page shows a Fable bar, and the `/model` picker in Claude Code does not say "Requires usage credits" on the Fable row | **Fable profile** |
+| 1. Fable is included in the plan's weekly limit: Max, Ultra, premium seats on Team, and premium seats on legacy seat-based Enterprise plans | The usage page shows a Fable bar, and the `/model` picker in Claude Code does not say "Requires usage credits" on the Fable row | **Included profile** |
 | 2. Pay per token: a key from the Claude Console, a cloud provider, or a usage-based Enterprise plan | The person talks about dollars per task or a monthly bill | **Fable profile** where Fable is offered. Its cost per task at medium is about the same as Opus at high |
 | 3. Fable bills to usage credits: Pro, standard Team seats, and standard seats on legacy seat-based Enterprise plans. Also when the Fable share in situation 1 is spent, or Fable is not offered (zero data retention, or an Enterprise admin has not enabled it) | On those plans `/model` says "Requires usage credits" on the Fable row. Where Fable is not offered, the row is missing or grayed out | **Opus profile** |
 
@@ -34,27 +34,32 @@ The same task can deserve a different pick depending on what the tokens draw on.
 - **Launch week only.** Through 2026-11-16 at 11:59 pm Pacific time, Pro and standard Team seats have Fable included for up to 50 percent of their weekly limits. After that it bills to usage credits. They stay in situation 3. The `/model` check may not work on those plans that week, so go by the plan name.
 - **Free plan.** Outside this lineup. It has no Opus, Fable or Claude Code (Anthropic's plan pricing page, read 2026-11-09).
 
-If you cannot tell and both profiles give different picks, give both in one line each.
+If you cannot tell and the profiles give different picks, give each in one line.
 
 Plan rules change often. `references/plans-and-costs.md` has what is confirmed, what is not, the sources and the prices.
 
 ## Step 3. Match the work to a pick
 
-Start from the stakes, then the kind of work.
+Start from the stakes, then the kind of work. Three kinds of work depend on the profile.
 
-| The work | Fable profile | Opus profile |
-| --- | --- | --- |
-| **Highest stakes.** A wrong answer would be silent and costly: correctness-critical code, specifications, text another model will follow, reports and recommendations people act on | Fable 5.2, xhigh | Opus 5.5, xhigh. If any Fable access exists, spend it here first |
-| **Substantial building and coding with tests.** The default for real work | Fable 5.2, medium. Step up to high when medium falls short, or when the weekly limit and the Fable bar both have room that would otherwise go unused | Opus 5.5, high |
-| **Independent review** of another model's work | Opus 5.5, high. Use xhigh to audit highest-stakes work | A fresh Opus 5.5 agent at high (xhigh for an audit). It is the same model as the author, so lean harder on tests |
-| **Long-running coordination** of other agents, and judgment calls along the way | Opus 5.5, high | Opus 5.5, high |
-| **Scoped, fully specified changes** with a check that catches a miss. Sifting logs and transcripts. High-volume triage | Sonnet 5.5, medium | Sonnet 5.5, medium |
-| **Research and knowledge work with sources** | Sonnet 5.5, high | Sonnet 5.5, high |
-| **Everyday questions, drafting and light edits** the person reads as they go | Sonnet 5.5 at its default | Sonnet 5.5 at its default |
-| **Summarize, classify, extract** at volume. Narrow helper jobs | Haiku 5.5, medium | Haiku 5.5, medium |
-| **Read-only search and lookup** | Haiku 5.5, low | Haiku 5.5, low |
+| The work | Included profile | Fable profile | Opus profile |
+| --- | --- | --- | --- |
+| **Highest stakes.** A wrong answer would be silent and costly: correctness-critical code, specifications, text another model will follow, reports and recommendations people act on | Fable 5.2, xhigh | Fable 5.2, xhigh | Opus 5.5, xhigh. If any Fable access exists, spend it here first |
+| **Substantial building and coding with tests.** The default for real work | Opus 5.5, high. Step up to Fable 5.2 at high when that falls short | Fable 5.2, medium. Step up to high when medium falls short | Opus 5.5, high |
+| **Independent review** of another model's work | Work built on Fable: Opus 5.5, xhigh to audit highest-stakes work, high otherwise. Work built on Opus: as the Opus profile | Opus 5.5, high. Use xhigh to audit highest-stakes work | A fresh Opus 5.5 agent at high (xhigh for an audit). It is the same model as the author, so lean harder on tests |
 
-Anthropic's own advice at the Fable 5.2 release is to start most coding and knowledge work on Opus 5.5 and move up to Fable for the most ambitious, open-ended work. The Fable profile goes a step further and makes Fable 5.2 at medium the default for substantial building. The reason is that on Anthropic's own cost charts Fable 5.2 at medium scores about level with or slightly above Opus 5.5 at high for about the same cost per task. That cost is in dollars. What the pick costs in plan allowance is not published. On a plan that includes Fable it draws the shared weekly limit faster than the other models, by an amount Anthropic does not state. Say so when the user's weekly limit is tight. If the user prefers to follow Anthropic's advice to the letter, the Opus profile is that advice.
+The rest is the same on every profile.
+
+| The work | Every profile |
+| --- | --- |
+| **Long-running coordination** of other agents, and judgment calls along the way | Opus 5.5, high |
+| **Scoped, fully specified changes** with a check that catches a miss. Sifting logs and transcripts. High-volume triage | Sonnet 5.5, medium |
+| **Research and knowledge work with sources** | Sonnet 5.5, high |
+| **Everyday questions, drafting and light edits** the person reads as they go | Sonnet 5.5 at its default |
+| **Summarize, classify, extract** at volume. Narrow helper jobs | Haiku 5.5, medium |
+| **Read-only search and lookup** | Haiku 5.5, low |
+
+Why the Included and Fable profiles differ. On an included plan Fable shares the one weekly limit and uses it faster than the other models, and Anthropic does not publish by how much. Anthropic's own advice at the Fable 5.2 release is to start most coding and knowledge work on Opus 5.5 and move up to Fable for the most ambitious, open-ended work. So the Included profile spends Fable where it matters most: on the highest-stakes work and as the step up. The Fable profile, for people who pay per token, goes a step further than that advice and makes Fable 5.2 at medium the default for substantial building. There the cost is in dollars, and on Anthropic's cost charts Fable 5.2 at medium scores about level with or slightly above Opus 5.5 at high for about the same cost per task (a chart reading). Both are the plugin owner's choices, not Anthropic's. If a user who pays per token prefers Anthropic's advice to the letter, the Opus profile is that advice.
 
 The evidence for every row is in `references/evidence.md`. Read it when the user asks why, challenges a pick, or the task sits between two rows.
 
@@ -69,7 +74,7 @@ The evidence for every row is in `references/evidence.md`. Read it when the user
 7. **Price per token is not cost per task.** A model that costs twice as much per token can cost less per task if it needs fewer tokens or fewer attempts. Compare cost per finished task.
 8. **Pick the model at the start of a long session and keep it.** Switching models makes the next request reread the whole conversation with no cache discount. Changing effort is cheap on the current models (details in `references/plans-and-costs.md`).
 9. **Do not start an agent for something one tool call can do.** Each agent has a fixed start cost of thousands of tokens.
-10. **Spend the allowance you have.** A weekly allowance unused at the reset is lost. If the weekly limit is heading to finish the week well under its cap, step the default up one level. If it is running out early, step down the lower-stakes work first, never the highest-stakes work. Judge by the weekly limit, which every model draws on. For Fable work also watch the Fable bar, which shows the 50 percent cap.
+10. **Spend the allowance you have.** A weekly allowance unused at the reset is lost. If the weekly limit is heading to finish the week well under its cap, step the default up one level. If it is running out early, step down the lower-stakes work first, never the highest-stakes work. Judge by the weekly limit, which every model draws on. On the Included profile the step up is Fable 5.2 at high, so also check that the Fable bar, which shows the 50 percent cap, has room.
 11. **Keep fast mode off for agent work.** It costs about double. Use it only when speed matters more than cost.
 12. **Do not relitigate a pick without new information.** Change a pick when there is a new model, new published evidence, or a measurement on the user's own work.
 
@@ -80,6 +85,8 @@ Work through this order before moving to a bigger model.
 1. **Context.** Was the request clear, were the right files and tools available, was the task scoped? Fix that first. It is the most common cause.
 2. **Effort.** If the model had what it needed but skipped checks or stopped early, raise effort one level.
 3. **Model.** If it had the context, clearly tried, and was still wrong, it did not know enough. Move up one model.
+
+On the Included profile, the step up for substantial building is Fable 5.2 at high, in place of Opus 5.5 at xhigh. It is the plugin's chosen step, and evidence.md shows the cost of each.
 
 On hard multi-step work a smaller model can burn many attempts near the edge of its ability, so the larger model can cost less per finished task.
 
@@ -111,10 +118,10 @@ Model IDs: `claude-fable-5-2`, `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-h
 
 ## When you are the one delegating
 
-Apply the same table to your own subagents before you start them.
+Apply the same picks to your own subagents before you start them.
 
 - Prefer named agents whose files pin a model and effort. If the project has them, use them, and pass no model or effort on the call. Either one overrides the file.
-- If there are none, choose the short model name that matches the table (`haiku`, `sonnet`, `opus`, `fable`) when starting the agent, and tell the user which you used. Short names move to the newest version with each release and can lag, so they are a stopgap. In Claude Code, `fable` means Fable 5.2 from version 2.1.321.
+- If there are none, choose the short model name that matches the pick (`haiku`, `sonnet`, `opus`, `fable`) when starting the agent, and tell the user which you used. Short names move to the newest version with each release and can lag, so they are a stopgap. In Claude Code, `fable` means Fable 5.2 from version 2.1.321.
 - Set the effort too, because the session's level does not carry over to an agent on another model. Use the agent file's `effort:` line, or the `effort` argument on the call that starts the agent where there is one (Claude Code 2.1.292 or later).
 - Do not run a lookup or a log search on the session's expensive model when a small one will do. In Claude Code the built-in helper agents inherit the session's model unless they are replaced.
 - Offer to set up agent files when the user is about to run a multi-agent build without them.

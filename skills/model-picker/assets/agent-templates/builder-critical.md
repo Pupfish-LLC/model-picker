@@ -1,7 +1,7 @@
 ---
 name: builder-critical
 description: Leads work where a wrong answer would be silent and costly. Use for correctness-critical code, reference implementations and known answers, specifications, text another model will follow, and reports or recommendations people will act on.
-# Fable profile. For the Opus profile use: model: claude-opus-5-5 with effort: xhigh
+# Fable profile and Included profile. For the Opus profile use: model: claude-opus-5-5 with effort: xhigh
 model: claude-fable-5-2
 effort: xhigh
 ---
