@@ -34,11 +34,19 @@ What it reviews:
 
 What happens next depends on what it finds:
 
-1. **Nothing that changes a pick, a price, a rule, a setup step or a stated fact.** It sets the review dates to that day, bumps the third version number, adds a one-line changelog entry and publishes. This date-only release needs no approval. Before pushing, it checks that nothing but the dates, the version and the changelog line differs.
+1. **Nothing that changes a pick, a price, a rule, a setup step or a stated fact.** It sets the review dates to that day, bumps the third version number, adds that week to the running line in the changelog and publishes. This date-only release needs no approval. Before pushing, it checks that nothing but the dates, the version and that one changelog line differs.
 2. **Something changed.** The drafter updates the plugin on a branch named `update/` followed by the date, using the procedure below. The auditor checks every changed claim against its source. The test questions are run. Then the session sends the owner a short summary and one question: publish, do not publish, or change something first.
 3. **The owner accepts.** The same session merges the branch into `main`, sets the version in the marketplace repository, and pushes both. No other steps are needed. It cannot push tags, so a tag is optional and done by hand.
 
 No change to the guidance is published without the owner's yes.
+
+### How quiet weeks are recorded
+
+A quiet week does not get its own changelog entry. The changelog has one section near the top, "Weekly reviews with no change", with a single running line.
+
+- The line starts with "Since" and the version of the newest full entry, for example `Since 1.0.2:`.
+- Each quiet week adds its date and version to the end of that line, for example `Since 1.0.2: 2026-11-12 (1.0.3), 2026-11-19 (1.0.4).` The first one replaces the words "none yet".
+- When a release with a real change is published, add one sentence to the end of the previous full entry, for example "Followed by 7 weekly reviews with no change, 1.0.3 to 1.0.9, the last on 2026-12-31." Then reset the running line to the new version followed by "none yet".
 
 One limit: Anthropic's cost charts are images. The weekly session can read prices, tables and documentation, but it can only use chart points that are stated in text, for example in a system card. When it cannot read a chart, it says so in the summary, and the owner supplies screenshots in the same session.
 

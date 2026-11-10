@@ -6,7 +6,13 @@ Version numbers:
 
 - **First number** changes when a pick in the lineup changes for a common kind of work.
 - **Second number** changes when a model is added, or evidence or rules are updated without changing the common picks.
-- **Third number** changes for corrections and wording.
+- **Third number** changes for corrections and wording, and for each weekly review that found nothing to change. So the third number tells you roughly how many quiet weeks have passed since the guidance last changed.
+
+## Weekly reviews with no change
+
+The guidance is reviewed in full every week. In a week where nothing needed to change, only the review date and the version move. Those weeks are listed on the one line below, with the version published that week, and get no entry of their own.
+
+Since 1.0.2: none yet.
 
 ## [1.0.2] - 2026-11-09
 
