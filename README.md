@@ -4,6 +4,8 @@
 
 Current as of **2026-11-09**. Covers Claude Fable 5.2, Opus 5.5, Sonnet 5.5 and Haiku 5.5.
 
+The best model choices are reevaluated every week, so [update the plugin](#how-it-stays-current) now and then to get the latest picks.
+
 ## What it does
 
 Claude comes in several models, and each can run at several effort levels. The biggest model at the highest effort is rarely the right choice. It costs more, it is slower, and on Anthropic's own charts the top effort level often scores no better than the one below it. The smallest model is not the right choice for hard work either, because failed attempts cost more than doing it properly once.
@@ -152,19 +154,28 @@ The full evidence, with sources and dates, is in [`skills/model-picker/reference
 
 ## How it stays current
 
-Model lineups, prices and published results change every few weeks. This plugin is updated when:
+Model lineups, prices and published results change every few weeks. The best model choices are reevaluated every week against Anthropic's latest releases, prices and documentation. A new version is published when:
 
 - Anthropic releases a new model or retires one.
 - Anthropic changes prices, plan limits or how Claude Code chooses models.
 - New published evidence, or measurements on real work, change which pick is best.
 
-Every version states the date it was last reviewed. If that date is more than about two months old, or you ask about a model the plugin does not know, Claude will tell you the guidance may be behind.
+Every change is reviewed by a person before it is published. Every version states the date it was last reviewed. If that date is more than about two months old, or you ask about a model the plugin does not know, Claude will tell you the guidance may be behind.
 
-To get updates, turn on auto-update for the Pupfish marketplace under **Marketplaces** in `/plugin`, or run:
+### Getting the latest version
 
-```
-/plugin marketplace update pupfish
-```
+You only receive a new version when you update. Pick one:
+
+- **Automatic.** Run `/plugin`, open **Marketplaces**, select **pupfish**, and choose **Enable auto-update**. New versions then arrive without any action from you.
+- **By hand, from the command line.** Run this in a session:
+
+  ```
+  /plugin marketplace update pupfish
+  ```
+
+- **By hand, in the Claude desktop app.** Under **Personal plugins**, click **+**, choose **Create plugin**, then **Add marketplace**, enter `Pupfish-LLC/claude-plugins` and click **Sync**.
+
+To see which version you have, run `claude plugin list` in a terminal and compare it with the top entry in the changelog.
 
 Changes are listed in [CHANGELOG.md](CHANGELOG.md). The update process is described in [MAINTAINING.md](MAINTAINING.md).
 

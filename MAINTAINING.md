@@ -10,6 +10,21 @@ How to keep the guidance current. Written for whoever updates the plugin, includ
 - New published evidence, or measurements on real work, point to a different pick.
 - The review date is more than about 60 days old. Review even if nothing seems to have changed.
 
+## The weekly check
+
+The readme tells users the picks are reevaluated every week. This is what makes that true.
+
+Once a week, a scheduled Claude session:
+
+1. Reads this file and the skill, then compares what the plugin records against Anthropic's news page, pricing page, plan help page and the Claude Code documentation for models, subagents, the prompt cache and the advisor.
+2. If nothing that affects a pick, a price, a rule or a setup step has changed, it stops and reports "no change". If the review date is more than 30 days old, it refreshes the review dates and bumps the third version number, so users can see the guidance was looked at.
+3. If something changed, it drafts the update by following the procedure below, on a new branch named `update/` followed by the date. It never pushes to `main` and never touches the marketplace repository.
+4. It reports what changed at Anthropic, what it changed in the plugin, whether any pick changes, and what it could not verify.
+
+A person reviews the branch, merges it, and then follows the release steps at the end of this file. Nothing is published without that review.
+
+One limit: Anthropic's cost charts are images. The weekly session can read prices, tables and documentation, but it can only use chart points that are stated in text, for example in a system card. When it cannot read a chart, it says so, and a person supplies the readings.
+
 ## Where each fact lives
 
 Keep each fact in one place so an update touches one file.

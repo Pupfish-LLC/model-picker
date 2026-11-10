@@ -8,6 +8,16 @@ Version numbers:
 - **Second number** changes when a model is added, or evidence or rules are updated without changing the common picks.
 - **Third number** changes for corrections and wording.
 
+## [1.0.2] - 2026-11-09
+
+Documentation only. The guidance is unchanged.
+
+### Changed
+
+- The readme now says the best model choices are reevaluated every week, and explains the three ways to get the latest version.
+- `MAINTAINING.md` describes the weekly check.
+- The `NOTICE` file now asks that it be kept with any copy or adaptation.
+
 ## [1.0.1] - 2026-11-09
 
 License change only. The guidance is unchanged, so there is nothing to do differently.
