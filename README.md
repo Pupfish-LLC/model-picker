@@ -96,7 +96,7 @@ Before starting any helper agent, use the model-picker skill to choose its model
 While planning, load the model-picker skill and give every work package an agent role, such as builder-critical or reviewer. Start agents by role, and pass no model or effort on the call.
 ```
 
-The second needs the [agent files set up](#setting-up-agents-in-claude-code) first. It makes each choice once, in writing, where you can review it.
+The second needs the [agent files set up](docs/agent-setup.md) first. It makes each choice once, in writing, where you can review it.
 
 ### The first thing it needs to know
 
@@ -144,34 +144,6 @@ A few rules do most of the work:
 - Pick the model at the start of a long session. Switching partway is expensive.
 - Do not start a helper agent for something a single lookup can do.
 
-## Setting up agents in Claude Code
-
-Ask Claude to "set up model-picker agents" and it will:
-
-1. Ask which case above applies to you, and whether the agents are for this project or for all your projects.
-2. Check for settings that would silently override the agents.
-3. Copy the agent files you want into place, without overwriting anything you already have unless you agree.
-4. Run a small test and read back from the session record which model and effort each agent used.
-
-The agent files that come with the plugin:
-
-| Agent | Runs on | For |
-| --- | --- | --- |
-| `builder-critical` | Opus 5.5, xhigh as shipped. Fable 5.2, xhigh in cases 1 and 2 | Work that must be correct |
-| `builder` | Opus 5.5, high as shipped. Fable 5.2, medium in case 2 | Other substantial building |
-| `auditor` | Opus 5.5, xhigh | Fresh, read-only review of `builder-critical` work |
-| `reviewer` | Opus 5.5, high | Fresh, read-only review of `builder` work |
-| `general-purpose` | Sonnet 5.5, medium | One specified change, or sifting a log |
-| `researcher` | Sonnet 5.5, high | Sourced research |
-| `summarizer` | Haiku 5.5, medium | Summarize, classify, extract |
-| `Explore` | Haiku 5.5, low | Read-only search |
-
-The two builder files ship on Opus 5.5, so a copied file never bills Fable to usage credits on any plan. A file copied by hand on Pro could otherwise bill Fable to usage credits, and through `claude -p` it would do so without asking. When Claude sets the files up it asks which case applies and upgrades them to match: `builder-critical` to Fable 5.2 at xhigh in cases 1 and 2, and `builder` to Fable 5.2 at medium in case 2.
-
-You do not need all of them. `Explore` and `general-purpose` alone stop quick searches and small jobs from running on your session's model, which is what Claude Code does by default.
-
-Nothing is installed into your projects until you ask. The plugin does not change your settings, and it does not run on any model by itself.
-
 ## What it is based on, and its limits
 
 The picks come from Anthropic's published release tables and its charts of benchmark score against cost per task, plus the Claude Code documentation. Each number in the plugin is labeled as published by Anthropic, read from a chart, reported by a third party, or observed once in real use.
@@ -204,6 +176,10 @@ You only receive a new version when you update.
 - **By hand.** Run `/plugin marketplace update pupfish` in a session. In the desktop app, sync the marketplace again the same way you added it.
 
 Changes are listed in [CHANGELOG.md](CHANGELOG.md). The update process is described in [MAINTAINING.md](MAINTAINING.md).
+
+## Setting up agents
+
+Optional. If you let Claude hand work to helper agents, the plugin comes with ready-made agent files, so that searches, reviews and small jobs stop running on your session's most expensive model. Ask Claude to "set up model-picker agents" and it walks you through it. Nothing is copied into your projects until you ask. The details are in [Setting up agents](docs/agent-setup.md).
 
 ## Feedback
 

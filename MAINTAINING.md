@@ -78,7 +78,8 @@ Keep each fact in one place so an update touches one file.
 | Claude Code settings, agent file fields, minimum versions | `skills/model-picker/references/claude-code-setup.md` |
 | The method itself | `skills/model-picker/references/reading-cost-charts.md` |
 | Model or effort of a template | `skills/model-picker/assets/agent-templates/` |
-| The picks table and the agent table for users | `README.md` |
+| The picks table for users | `README.md` |
+| The agent table and setup steps for users | `docs/agent-setup.md` |
 | What changed and why | `CHANGELOG.md` |
 | The version | `.claude-plugin/plugin.json`, and the entry in the marketplace repository |
 
@@ -90,7 +91,7 @@ Keep each fact in one place so an update touches one file.
 4. **Re-check the rules** in `SKILL.md` against the new evidence. Do not change a rule without new data.
 5. **Check the documentation**, not memory, for anything about Claude Code: how short model names resolve, effort defaults, agent file fields, cache behavior. The documentation can lag a release by days, so note where it has not caught up.
 6. **Update the templates** if a pick changed. Always use full model IDs.
-7. **Update the user documents.** The picks table and the review date in `README.md`, and a new entry in `CHANGELOG.md` that says in plain words whether people should change what they use.
+7. **Update the user documents.** The picks table and the review date in `README.md`, the agent table in `docs/agent-setup.md` if a template changed, and a new entry in `CHANGELOG.md` that says in plain words whether people should change what they use.
 8. **Set the review date** at the top of `SKILL.md` and each reference file.
 9. **Run the test questions** below.
 10. **Release** (see below).

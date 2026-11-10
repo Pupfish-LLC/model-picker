@@ -31,6 +31,7 @@ No pick changes, so there is nothing to do differently. This release explains ho
 - The readme is shorter. The file listing is removed and the update instructions are condensed.
 - The `NOTICE` file adds one sentence: "That is all that we ask."
 - The readme's rule on review now says "by a different model when you can", to match the picks table, where work built on Opus 5.5 is reviewed by a fresh Opus 5.5 agent.
+- The readme's agent setup section is now its own page, [`docs/agent-setup.md`](docs/agent-setup.md), rewritten in plainer language with examples of how to ask for an agent. The readme keeps a short section near the end that links to it. The agent files and the setup steps are unchanged.
 
 ## [2.0.0] - 2026-11-09
 
