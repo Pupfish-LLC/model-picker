@@ -41,7 +41,7 @@ Follow these steps when the user asks to set up or fix agent models.
    - `~/.claude/agents/` in the user's home folder: applies to all their projects.
 3. **Look before writing.** List any agent files already there. Never overwrite one without showing the user the difference and getting a yes. If an existing agent already does a role well, only adjust its `model:` and `effort:` lines.
 4. **Check for overrides** (section 5). Report any that are set and what they do. Do not change the user's settings without asking.
-5. **Copy the templates** the user wants from `assets/agent-templates/` into the chosen folder. For the Included profile, change `builder.md` as shown in section 3. For the Opus profile, change both builder files. Adjust the body text to the project if the user wants, and keep it short.
+5. **Copy the templates** the user wants from `assets/agent-templates/` into the chosen folder. The files ship with picks that never bill Fable to usage credits. For the Fable profile (case 2), upgrade both builder files as shown in section 3. For the Included profile (case 1), upgrade `builder-critical.md` only. For the Opus profile (case 3), change nothing. Adjust the body text to the project if the user wants, and keep it short.
 6. **Tell the user when it takes effect** (section 7). A new agents folder needs a restart.
 7. **Verify** (section 8). Start one trivial task on each new agent and read the model and effort from its transcript. Report what ran, not what was configured.
 
@@ -51,10 +51,10 @@ The user does not need every template. A project with no multi-agent build may o
 
 In `assets/agent-templates/`:
 
-| File | Agent name | Fable profile (as shipped) | Included profile | Opus profile | Role |
+| File | Agent name | Opus profile (as shipped) | Included profile | Fable profile | Role |
 | --- | --- | --- | --- | --- | --- |
-| `builder-critical.md` | `builder-critical` | `claude-fable-5-2`, xhigh | same | `claude-opus-5-5`, xhigh | Work where a silent wrong answer would be costly |
-| `builder.md` | `builder` | `claude-fable-5-2`, medium | `claude-opus-5-5`, high | `claude-opus-5-5`, high | Every other substantial piece of building |
+| `builder-critical.md` | `builder-critical` | `claude-opus-5-5`, xhigh | `claude-fable-5-2`, xhigh | `claude-fable-5-2`, xhigh | Work where a silent wrong answer would be costly |
+| `builder.md` | `builder` | `claude-opus-5-5`, high | same | `claude-fable-5-2`, medium | Every other substantial piece of building |
 | `auditor.md` | `auditor` | `claude-opus-5-5`, xhigh | same | same | Fresh review of `builder-critical` work. Read-only |
 | `reviewer.md` | `reviewer` | `claude-opus-5-5`, high | same | same | Fresh review of `builder` work. Read-only |
 | `general-purpose.md` | `general-purpose` | `claude-sonnet-5-5`, medium | same | same | One fully specified change, or sifting a log. Replaces the built-in |
@@ -62,9 +62,9 @@ In `assets/agent-templates/`:
 | `summarizer.md` | `summarizer` | `claude-haiku-5-5`, medium | same | same | Summarize, classify, extract |
 | `Explore.md` | `Explore` | `claude-haiku-5-5`, low | same | same | Read-only search. Replaces the built-in |
 
-The templates ship with the Fable profile, the picks for people who pay per token. For the Included profile, edit only `builder.md`. For the Opus profile, edit `builder-critical.md` and `builder.md`.
+The templates ship with the Opus profile, whose picks never bill Fable to usage credits on any plan. The reason is that a file copied by hand on Pro could otherwise bill Fable to usage credits, and through `claude -p` it would do so without asking. For the Fable profile, edit `builder-critical.md` and `builder.md`. For the Included profile, edit only `builder-critical.md`. For the Opus profile, edit nothing. The comments at the top of the two files give the settings.
 
-On the Included profile the step up for `builder` is `claude-fable-5-2` at high, when `claude-opus-5-5` at high falls short. The comment at the top of `builder.md` gives both settings.
+On the Included profile, when `builder` on `claude-opus-5-5` at high falls short, follow the order in the main skill file. If it skipped checks or stopped early, raise effort to xhigh. If it had the context, clearly tried and was still wrong, move to `claude-fable-5-2` at high.
 
 On the Opus profile, and for `builder` work on the Included profile, the reviewer and the author are the same model. A fresh agent still helps, because it never saw the work being written, but it shares the author's blind spots. Lean harder on tests.
 

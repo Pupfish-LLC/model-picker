@@ -20,13 +20,13 @@ One pick changes for people whose plan includes Fable. The way the picker sorts 
 
 ### Should you change what you use?
 
-- **On Max, Ultra, and premium seats on Team and on legacy seat-based Enterprise plans: yes, for substantial building.** The default for substantial building and coding with tests moves from Fable 5.2 at medium to Opus 5.5 at high. Fable 5.2 at high is the step up when Opus 5.5 at high falls short. The highest-stakes pick stays Fable 5.2 at xhigh. If you installed the `builder` agent file, change it to `claude-opus-5-5` with effort `high`.
+- **On Max, Ultra, and premium seats on Team and on legacy seat-based Enterprise plans: yes, for substantial building.** The default for substantial building and coding with tests moves from Fable 5.2 at medium to Opus 5.5 at high. When that falls short, follow the usual order. If it skipped checks or stopped early, raise effort to xhigh. If it had the context, clearly tried and was still wrong, move to Fable 5.2 at high. The highest-stakes pick stays Fable 5.2 at xhigh. If you installed the `builder` agent file, change it to `claude-opus-5-5` with effort `high`.
 - **Review on those plans.** Work built on Opus 5.5 is now reviewed by a fresh Opus 5.5 agent, so the author and the reviewer are the same model. Lean harder on tests. Highest-stakes work built on Fable is still audited on Opus 5.5 at xhigh.
 - **If you pay per token: no change.** Fable 5.2 at medium stays the default for substantial building, with high as the step up.
 - **On Pro and standard Team seats: no change to the picks.** Opus 5.5 at high stays the default. Expect Fable to bill to usage credits after 2026-11-16. Until 11:59 pm Pacific time that day, Fable is included for up to 50 percent of your weekly limit as a launch offer. Usage credits bill per token at standard API rates. If you choose to pay for Fable that way, the pay-per-token picks apply to that work.
 - **How to tell which case you are in.** Open the `/model` picker in Claude Code. "Requires usage credits" on the Fable row means Fable is not included in your plan. No such label, together with a Fable bar on your usage page, means it is included. The one exception is Pro and standard Team seats during the launch week, so go by your plan name that week.
 
-Why the pick changed. Earlier versions said Max and Ultra had a separate weekly Fable allowance and that Fable work did not draw down the general limit. Anthropic's help page says otherwise. Fable can use up to 50 percent of your weekly limit. It draws on the same weekly limit as the other models and uses it faster, and Anthropic does not publish how much faster. Anthropic's own advice is to start most work on Opus 5.5. So plans that include Fable now spend it where it matters most, on the highest-stakes work and as the step up. For people who pay per token the cost is in dollars, and there Fable 5.2 at medium costs about the same per task as Opus 5.5 at high on Anthropic's charts (a chart reading). This is the plugin owner's choice.
+Why the pick changed. Earlier versions said Max and Ultra had a separate weekly Fable allowance and that Fable work did not draw down the general limit. Anthropic's help page says otherwise. Fable can use up to 50 percent of your weekly limit. It draws on the same weekly limit as the other models and uses it faster, and Anthropic does not publish how much faster. Anthropic's own advice is to start most work on Opus 5.5. So plans that include Fable now spend it where it matters most, on the highest-stakes work, and on building work where Opus 5.5 clearly tried and was still wrong. For people who pay per token the cost is in dollars, and there Fable 5.2 at medium costs about the same per task as Opus 5.5 at high on Anthropic's charts (a chart reading). This is the plugin owner's choice.
 
 The plan facts above are from Anthropic's help pages, and the `/model` label is from the Claude Code documentation. They were read on 2026-11-09 and checked a second time the same day. The sources are in `plans-and-costs.md`.
 
@@ -40,13 +40,20 @@ Before, two sets of picks:
 
 Now, three sets of picks:
 
-1. Fable is included in the plan's weekly limit: Max, Ultra, premium seats on Team, and premium seats on legacy seat-based Enterprise plans. Included picks: Fable 5.2 at xhigh for the highest stakes, Opus 5.5 at high for substantial building with Fable 5.2 at high as the step up, and the Opus picks for everything else.
+1. Fable is included in the plan's weekly limit: Max, Ultra, premium seats on Team, and premium seats on legacy seat-based Enterprise plans. Included picks: Fable 5.2 at xhigh for the highest stakes, Opus 5.5 at high for substantial building, and the Opus picks for everything else. When Opus 5.5 at high falls short on building work, xhigh comes first, then Fable 5.2 at high.
 2. Pay per token: a key from the Claude Console, a cloud provider, or a usage-based Enterprise plan. Fable picks, unchanged.
 3. Fable bills to usage credits: Pro, standard Team seats, and standard seats on legacy seat-based Enterprise plans. Also when the Fable share is spent, or Fable is not offered (zero data retention, or an Enterprise admin has not enabled it). Opus picks, unchanged.
 
 The Free plan is outside the lineup. It has no Opus, no Fable and no Claude Code (Anthropic's plan pricing page, read 2026-11-09).
 
 The change appears in steps 2 and 3 of the skill, `plans-and-costs.md`, `evidence.md`, `claude-code-setup.md`, the two builder agent templates, and the matching sections of the readme.
+
+### Changed: the builder agent templates
+
+- `builder` now ships as `claude-opus-5-5` at high, and `builder-critical` as `claude-opus-5-5` at xhigh. Before, both shipped on Fable 5.2.
+- The reason is that these picks never bill Fable to usage credits on any plan. A file copied by hand on Pro could bill Fable to usage credits, and through `claude -p` it would do so without asking.
+- The upgrades are in a comment at the top of each file: `builder-critical` to `claude-fable-5-2` at xhigh for cases 1 and 2, and `builder` to `claude-fable-5-2` at medium for case 2. Setup still asks which case applies and makes these changes.
+- If you copied the builder files by hand on Pro or a standard seat, set them to `claude-opus-5-5`.
 
 ### Corrected
 
@@ -65,8 +72,8 @@ The change appears in steps 2 and 3 of the skill, `plans-and-costs.md`, `evidenc
 
 - The picks for people who pay per token, and for plans where Fable bills to usage credits or is not offered.
 - Every pick on the rows that are the same for everyone: coordination, scoped changes, research, everyday questions, summarizing and lookup.
-- The models and effort levels the agent templates ship with. The two builder templates now say in a comment what to set for each case. The model IDs and the prices are unchanged.
-- The rules that decide close calls, apart from rule 10. It now says to judge by the weekly limit, which every model draws on, and to check the Fable bar before stepping up to Fable on an included plan.
+- The six agent templates other than the two builders. The model IDs and the prices.
+- The rules that decide close calls, apart from rule 10. It now says to judge by the weekly limit, which every model draws on, and to check the Fable bar before moving work to Fable on an included plan.
 
 ### Known gaps
 

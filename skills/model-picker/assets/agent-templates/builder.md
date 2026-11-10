@@ -1,11 +1,11 @@
 ---
 name: builder
 description: Leads substantial building and coding work that has tests or another clear check. The default agent for real work that is not correctness-critical.
-# Fable profile (pay per token). If medium falls short, raise effort to high before changing the model.
-# For the Included profile (Fable in the plan's weekly limit) and the Opus profile use: model: claude-opus-5-5 with effort: high
-# On the Included profile, if that falls short, step up to: model: claude-fable-5-2 with effort: high
-model: claude-fable-5-2
-effort: medium
+# Ships on Opus so that a copied file never bills Fable to usage credits. This is the pick for cases 1 and 3 (Included and Opus profiles).
+# Case 2 (pay per token, Fable profile): upgrade to model: claude-fable-5-2 with effort: medium. If medium falls short, raise effort to high.
+# Case 1, when this falls short: if it skipped checks or stopped early, raise effort to xhigh. If it clearly tried and was still wrong, use model: claude-fable-5-2 with effort: high.
+model: claude-opus-5-5
+effort: high
 ---
 
 You lead a substantial piece of building work.

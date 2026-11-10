@@ -75,7 +75,7 @@ Source: Anthropic help article 15424964, "Claude Fable models on your plan", htt
 - The Fable share is a cap inside the weekly limit. It is not a separate pool. In Anthropic's words: "your use of other models draws from the same usage limits and you can never use more than your weekly limit."
 - The clearest proof is the worked example in help article 17506494 (below): someone who has used 80 percent of the weekly limit, 50 on Fable and 30 on other models, is back at 30 percent after a Fable limit reset.
 - So on an included plan, every piece of Fable work uses up the same weekly limit that Opus, Sonnet and Haiku work draws on, and uses it faster.
-- This is why included plans have their own picks, the Included profile in the skill. Substantial building defaults to Opus 5.5 at high. Fable 5.2 is kept for the highest-stakes work, at xhigh, and for the step up, at high. That is the plugin owner's choice, made on 2026-11-09.
+- This is why included plans have their own picks, the Included profile in the skill. Substantial building defaults to Opus 5.5 at high. Fable 5.2 is kept for the highest-stakes work, at xhigh, and, at high, for building work where Opus 5.5 clearly tried and was still wrong. That is the plugin owner's choice, made on 2026-11-09.
 - Help articles 11145838 and 12429409 still say that Max and Ultra have "a separate weekly limit for Fable". That fits the facts above if it means the 50 percent cap, which the usage page shows as its own bar. It does not mean a second pool of usage.
 - The plan pricing page agrees (read 2026-11-09). It lists Fable on Max and Ultra as "50% of weekly limits". On Pro it says "Fable, paid with usage credits" on the plan card and "Usage credits" in the comparison table.
 - Versions of this plugin before 2.0.0 treated the Fable limit on Max and Ultra as a separate weekly limit and advised spreading work across the two. The help article says otherwise.
@@ -115,7 +115,7 @@ Practical advice:
 
 - To learn what Fable costs on a given plan, read both bars before and after the first real piece of Fable work. Fable work counts against the weekly limit as well as against its own cap.
 - Do not plan as if heavy building on Fable left the weekly limit free for other work. Fable work, and coordination, review and helper work on other models, all draw on the same limit, and Fable draws it faster.
-- A weekly allowance unused at the reset is lost. If the weekly limit is heading to end the week well under its cap, step the default up one level. On an included plan that step is Fable 5.2 at high, so check the Fable bar as well, because Fable stops being included at 50 percent of the weekly limit.
+- A weekly allowance unused at the reset is lost. If the weekly limit is heading to end the week well under its cap, step the default up one level. Before moving work to Fable on an included plan, check the Fable bar as well, because Fable stops being included at 50 percent of the weekly limit.
 - If the weekly limit is running out early because of Fable work and a Fable limit reset is available, use it before stepping the important work down. A reset gives back only the Fable usage.
 
 ## 4. Usage credits and fast mode

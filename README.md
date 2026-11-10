@@ -83,7 +83,7 @@ For a project with several kinds of work, you get a small table with one row per
 
 The right pick depends on how you pay, so Claude may ask one question:
 
-1. **Fable is included in your plan's weekly limit.** This is Max, Ultra, and premium seats on Team and on legacy seat-based Enterprise plans. Fable can use up to 50 percent of your weekly limit. It draws on the same weekly limit as the other models and uses it faster, so it is not a separate allowance. Opus 5.5 at high effort is the default for substantial work. Fable 5.2 is kept for the highest-stakes work, and for the step up when Opus 5.5 at high falls short.
+1. **Fable is included in your plan's weekly limit.** This is Max, Ultra, and premium seats on Team and on legacy seat-based Enterprise plans. Fable can use up to 50 percent of your weekly limit. It draws on the same weekly limit as the other models and uses it faster, so it is not a separate allowance. Opus 5.5 at high effort is the default for substantial work. Fable 5.2 is kept for the highest-stakes work, and for building work where Opus 5.5 clearly tried and was still wrong.
 2. **You pay per token.** This is a key from the Claude Console, a cloud provider, or a usage-based Enterprise plan. Fable 5.2 at medium costs about the same per task as Opus 5.5 at high, so Fable 5.2 at medium is the default for substantial work where Fable is offered.
 3. **Fable bills to usage credits, or is not available.** This is Pro, and standard seats on Team and on legacy seat-based Enterprise plans. It also applies when your Fable share is used up, under zero data retention, and where an Enterprise admin has not turned Fable on. Opus 5.5 at high is the default, with Fable saved for the hardest work. If you choose to pay for Fable with usage credits, you pay per token for that work, so case 2 applies to it.
 
@@ -102,7 +102,7 @@ Three kinds of work depend on which case you are in.
 | The work | Case 1: Fable included in your plan | Case 2: you pay per token | Case 3: Fable on usage credits, or not available |
 | --- | --- | --- | --- |
 | Highest stakes, where a wrong answer would be silent and costly | Fable 5.2, xhigh | Fable 5.2, xhigh | Opus 5.5, xhigh |
-| Substantial building and coding with tests | Opus 5.5, high. Step up to Fable 5.2, high | Fable 5.2, medium. Step up to high | Opus 5.5, high |
+| Substantial building and coding with tests | Opus 5.5, high. If it skips checks or stops early, xhigh. If it tries and is still wrong, Fable 5.2, high | Fable 5.2, medium. Step up to high | Opus 5.5, high |
 | Independent review of another model's work | Opus 5.5, xhigh for highest-stakes work built on Fable, high for other work built on Fable. A fresh Opus 5.5 agent, high, for work built on Opus | Opus 5.5, high | A fresh Opus 5.5 agent, high |
 
 The rest is the same in every case.
@@ -138,8 +138,8 @@ The agent files that come with the plugin:
 
 | Agent | Runs on | For |
 | --- | --- | --- |
-| `builder-critical` | Fable 5.2, xhigh. Opus 5.5, xhigh in case 3 | Work that must be correct |
-| `builder` | Opus 5.5, high in cases 1 and 3. Fable 5.2, medium in case 2 | Other substantial building |
+| `builder-critical` | Opus 5.5, xhigh as shipped. Fable 5.2, xhigh in cases 1 and 2 | Work that must be correct |
+| `builder` | Opus 5.5, high as shipped. Fable 5.2, medium in case 2 | Other substantial building |
 | `auditor` | Opus 5.5, xhigh | Fresh, read-only review of `builder-critical` work |
 | `reviewer` | Opus 5.5, high | Fresh, read-only review of `builder` work |
 | `general-purpose` | Sonnet 5.5, medium | One specified change, or sifting a log |
@@ -147,7 +147,7 @@ The agent files that come with the plugin:
 | `summarizer` | Haiku 5.5, medium | Summarize, classify, extract |
 | `Explore` | Haiku 5.5, low | Read-only search |
 
-The files ship with the case 2 picks. When Claude sets them up it asks which case applies and changes the builder files that differ for your case.
+The two builder files ship on Opus 5.5, so a copied file never bills Fable to usage credits on any plan. A file copied by hand on Pro could otherwise bill Fable to usage credits, and through `claude -p` it would do so without asking. When Claude sets the files up it asks which case applies and upgrades them to match: `builder-critical` to Fable 5.2 at xhigh in cases 1 and 2, and `builder` to Fable 5.2 at medium in case 2.
 
 You do not need all of them. `Explore` and `general-purpose` alone stop quick searches and small jobs from running on your session's model, which is what Claude Code does by default.
 
