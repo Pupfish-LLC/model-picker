@@ -8,6 +8,15 @@ Version numbers:
 - **Second number** changes when a model is added, or evidence or rules are updated without changing the common picks.
 - **Third number** changes for corrections and wording.
 
+## [1.0.1] - 2026-11-09
+
+License change only. The guidance is unchanged, so there is nothing to do differently.
+
+### Changed
+
+- The plugin is now released under the Apache License, Version 2.0, in place of the earlier proprietary license. Anyone may use, change and share it.
+- Added a `NOTICE` file. It must be kept with any copy that is passed on or built upon.
+
 ## [1.0.0] - 2026-11-09
 
 First release. Guidance reviewed against Anthropic's sources on 2026-11-09, the day Claude Fable 5.2 was released.

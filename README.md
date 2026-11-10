@@ -184,12 +184,17 @@ model-picker/
   README.md
   CHANGELOG.md
   MAINTAINING.md
-  LICENSE
+  LICENSE                           The Apache License, Version 2.0
+  NOTICE                            The attribution notice that travels with copies
 ```
 
 ## Feedback
 
 If a pick did not work for you, or your own measurements disagree with the guidance, please open an issue at https://github.com/Pupfish-LLC/model-picker/issues. Real measurements are the most useful thing you can send.
+
+## License
+
+Released under the [Apache License, Version 2.0](LICENSE). You are free to use it, change it and share it, including in commercial work. If you pass it on or build on it, keep the [NOTICE](NOTICE) file with it and say which files you changed. The license does not grant use of the Pupfish name.
 
 ## Author
 
