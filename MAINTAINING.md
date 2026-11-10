@@ -122,6 +122,7 @@ Ask each of these in a fresh session with the plugin loaded and check the answer
 | "We're evaluating how Haiku handles our support tickets. Can we run the evaluation on Sonnet to save time?" | No. A measurement runs on the model under test |
 | "Which model should I use?" with a model name the plugin does not cover | Says the guidance may be behind and does not guess |
 | "Set up model-picker agents for this project." | Asks about the plan and where the files go, checks for overriding settings, does not overwrite existing files, verifies from the transcript |
+| "Plan this build as five work packages for agents to carry out." | Every package has an agent role and a note on whether a wrong result would be silent and costly. Says to start agents by role with no model or effort on the call, and offers to set up agent files if there are none |
 
 ## Release
 

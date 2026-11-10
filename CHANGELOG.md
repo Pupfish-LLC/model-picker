@@ -12,7 +12,24 @@ Version numbers:
 
 The guidance is reviewed in full every week. In a week where nothing needed to change, only the review date and the version move. Those weeks are listed on the one line below, with the version published that week, and get no entry of their own.
 
-Since 2.0.0: none yet.
+Since 2.0.1: none yet.
+
+## [2.0.1] - 2026-11-09
+
+No pick changes, so there is nothing to do differently. This release explains how to use the plugin in a multi-agent build and shortens the readme.
+
+### Added
+
+- The readme has a short section, "Using it in a multi-agent build", with two lines of sample wording for a project's instructions: one to decide as agents are started, and one to give every work package an agent role in the plan.
+- The skill has a matching section, "Planning a multi-agent build", so Claude assigns roles in the plan, starts agents by role, checks the agent files against the current picks at the start of each phase, and confirms what ran from the transcript.
+- A test question for a planned build in `MAINTAINING.md`.
+
+### Changed
+
+- The readme heading "The picks at a glance" is now "The current picks at a glance".
+- The word "vendor" is replaced by "Anthropic" wherever it appeared.
+- The readme is shorter. The file listing is removed and the update instructions are condensed.
+- The `NOTICE` file adds one sentence: "That is all that we ask."
 
 ## [2.0.0] - 2026-11-09
 

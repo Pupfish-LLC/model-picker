@@ -1,7 +1,7 @@
 {
   "name": "model-picker",
   "description": "Helps Claude pick the right Claude model and effort level for the work, from Haiku 5.5 to Fable 5.2. One skill that matches a task to a model and effort based on the stakes, the kind of work and how you pay, with the published evidence behind each pick. Includes ready-made agent files for Claude Code and a way to verify which model each agent really ran on. Updated when Anthropic releases or changes a model.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Pupfish Analytics",
     "url": "https://pupfish.io"

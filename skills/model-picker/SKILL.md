@@ -124,6 +124,17 @@ Apply the same picks to your own subagents before you start them.
 - Do not run a lookup or a log search on the session's expensive model when a small one will do. In Claude Code the built-in helper agents inherit the session's model unless they are replaced.
 - Offer to set up agent files when the user is about to run a multi-agent build without them.
 
+## Planning a multi-agent build
+
+When asked to plan work that several agents will carry out, or when the project's instructions say to give work packages agent roles, make the choices in the plan and not at each start.
+
+- Give every work package an agent role from the project's agent files, such as `builder-critical`, `builder`, `reviewer` or `Explore`. Note for each package whether a wrong result would be silent and costly, because that decides the role.
+- If the project has no agent files, offer to set them up first. If a package fits no role, say so and pick for it on the fly, as in the section above.
+- State the payment situation once, in the plan or the project's instructions, so it is not asked again each session.
+- Start agents by role and pass no model or effort on the call.
+- At the start of each phase, compare the agent files with the current picks and report any difference before changing anything. The files are copies and do not follow the plugin's updates.
+- After the first agent of each role runs, confirm its model and effort from its transcript, as `references/claude-code-setup.md` describes.
+
 ## Setting up Claude Code agents
 
 When the user asks to set up, check or fix models for Claude Code agents, read `references/claude-code-setup.md` and follow it. Ready-made agent files are in `assets/agent-templates/`. That reference covers where the files go, which settings silently override them, how to replace the built-in helper agents, and how to prove from the transcript which model and effort an agent really ran on.

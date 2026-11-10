@@ -16,8 +16,7 @@ This plugin gives Claude a tested way to choose. When you ask, Claude will:
 - **Explain the pick in a sentence or two**, and tell you what to step up to if it falls short.
 - **Set up agents in Claude Code** so each kind of work runs on a suitable model, instead of everything running on your most expensive one.
 - **Check what your agents really ran on**, from the session records, so you are not guessing.
-
-Claude also uses it on its own initiative before it hands work to helper agents.
+- **Assign a model and effort to every agent in a multi-agent build**, in the plan or as agents are started.
 
 ## Who it is for
 
@@ -95,7 +94,25 @@ The Free plan is outside these picks. It has no Opus, no Fable and no Claude Cod
 
 The plan rules are from Anthropic's help pages, the Free plan facts from its plan pricing page, and the `/model` label from the Claude Code documentation. They were read on 2026-11-09. The sources are in [`plans-and-costs.md`](skills/model-picker/references/plans-and-costs.md).
 
-## The picks at a glance
+## Using it in a multi-agent build
+
+A session that coordinates other agents can use the plugin in two ways. Add one of these to the project's instructions.
+
+**Simplest. Decide as agents are started.**
+
+```
+Before starting any helper agent, use the model-picker skill to choose its model and effort.
+```
+
+**For a planned build. Decide once, in the plan.**
+
+```
+While planning, load the model-picker skill and give every work package an agent role, such as builder-critical or reviewer. Start agents by role, and pass no model or effort on the call.
+```
+
+The second needs the [agent files set up](#setting-up-agents-in-claude-code) first. It makes each choice once, in writing, where you can review it.
+
+## The current picks at a glance
 
 Three kinds of work depend on which case you are in.
 
@@ -159,7 +176,7 @@ The picks come from Anthropic's published release tables and its charts of bench
 
 Please keep these limits in mind:
 
-- **These are vendor figures, not measurements on your work.** They are a well-supported starting point. If a choice matters to you, measure it on your own tasks.
+- **The figures are Anthropic's own, not measurements on your work.** They are a well-supported starting point. If a choice matters to you, measure it on your own tasks.
 - **Chart readings are approximate.** Gaps of two or three points between two picks are within normal noise.
 - **One pick goes further than Anthropic's advice.** Anthropic suggests starting most work on Opus 5.5 and moving up to Fable for the most ambitious work. For people who pay per token, this plugin makes Fable 5.2 at medium the default for substantial building, because Anthropic's own cost charts show it scoring about level with or slightly above Opus 5.5 at high for about the same cost per task. On a plan that includes Fable, the plugin keeps to Anthropic's advice and defaults to Opus 5.5 at high. There Fable draws on your one weekly limit faster than the other models do, and Anthropic has not published how much faster. Both are the plugin owner's choices. If you pay per token and prefer Anthropic's advice as given, use the case 3 column.
 - **Plan rules change often** and some are not published. The plugin says which ones it could not confirm.
@@ -179,40 +196,12 @@ Every change to the guidance is reviewed by a person before it is published. In 
 
 ### Getting the latest version
 
-You only receive a new version when you update. Pick one:
+You only receive a new version when you update.
 
-- **Automatic.** Run `/plugin`, open **Marketplaces**, select **pupfish**, and choose **Enable auto-update**. New versions then arrive without any action from you.
-- **By hand, from the command line.** Run this in a session:
-
-  ```
-  /plugin marketplace update pupfish
-  ```
-
-- **By hand, in the Claude desktop app.** Under **Personal plugins**, click **+**, choose **Create plugin**, then **Add marketplace**, enter `Pupfish-LLC/claude-plugins` and click **Sync**.
-
-To see which version you have, run `claude plugin list` in a terminal and compare it with the top entry in the changelog.
+- **Automatic.** Run `/plugin`, open **Marketplaces**, select **pupfish**, and choose **Enable auto-update**.
+- **By hand.** Run `/plugin marketplace update pupfish` in a session. In the desktop app, sync the marketplace again the same way you added it.
 
 Changes are listed in [CHANGELOG.md](CHANGELOG.md). The update process is described in [MAINTAINING.md](MAINTAINING.md).
-
-## What is inside
-
-```
-model-picker/
-  .claude-plugin/plugin.json        The plugin's name and version
-  skills/model-picker/
-    SKILL.md                        How Claude chooses, and how it answers
-    references/
-      evidence.md                   The charts, tables and sources behind each pick
-      plans-and-costs.md            Prices, plan limits, the prompt cache
-      claude-code-setup.md          Agent files, overriding settings, verification
-      reading-cost-charts.md        The method for placing a new model
-    assets/agent-templates/         Ready-made agent files for Claude Code
-  README.md
-  CHANGELOG.md
-  MAINTAINING.md
-  LICENSE                           The Apache License, Version 2.0
-  NOTICE                            The attribution notice that travels with copies
-```
 
 ## Feedback
 

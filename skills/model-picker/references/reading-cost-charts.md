@@ -35,7 +35,7 @@ Anthropic publishes charts that plot a benchmark score against the cost per task
 
 A new model and effort pair earns a place in the lineup only when it is on the best value line and either beats the current pick at the same cost or matches it for less. Whatever it dominates is dropped, with the reason recorded.
 
-Do not place a model from its name, its tier or the vendor's adjectives. Place it from its points on a chart.
+Do not place a model from its name, its tier or the maker's adjectives. Place it from its points on a chart.
 
 ## Common mistakes
 

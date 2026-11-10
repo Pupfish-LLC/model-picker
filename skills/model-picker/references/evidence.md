@@ -229,7 +229,7 @@ What this means for picking:
 - How the weekly limit weighs Opus, Sonnet and Haiku tokens against each other.
 - Sonnet 5.5's knowledge-work cost by effort, which would settle high against medium for research.
 - Haiku 5.5's cost by effort from Anthropic's own charts.
-- Whether these vendor figures hold on the user's own work. This is the one that matters most.
+- Whether Anthropic's figures hold on the user's own work. This is the one that matters most.
 
 Closed at the 2026-11-09 review. The details and sources are in `plans-and-costs.md`, section 3.
 
