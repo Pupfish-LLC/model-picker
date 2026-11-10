@@ -14,16 +14,33 @@ How to keep the guidance current. Written for whoever updates the plugin, includ
 
 The readme tells users the picks are reevaluated every week. This is what makes that true.
 
-Once a week, a scheduled Claude session:
+Once a week, a scheduled Claude session runs a full review. The roles follow the plugin's own lineup.
 
-1. Reads this file and the skill, then compares what the plugin records against Anthropic's news page, pricing page, plan help page and the Claude Code documentation for models, subagents, the prompt cache and the advisor.
-2. If nothing that affects a pick, a price, a rule or a setup step has changed, it stops and reports "no change". If the review date is more than 30 days old, it refreshes the review dates and bumps the third version number, so users can see the guidance was looked at.
-3. If something changed, it drafts the update by following the procedure below, on a new branch named `update/` followed by the date. It never pushes to `main` and never touches the marketplace repository.
-4. It reports what changed at Anthropic, what it changed in the plugin, whether any pick changes, and what it could not verify.
+| Role | Runs on | Why |
+| --- | --- | --- |
+| Coordinator (the session itself) | Opus 5.5 | Coordination and judgment calls |
+| Researcher | Sonnet 5.5, high | Research with sources |
+| Drafter, only when something changed | Fable 5.2, xhigh | Text other models follow, and recommendations people act on |
+| Auditor, only when something changed | Opus 5.5, xhigh | A fresh check by a different model from the drafter |
 
-A person reviews the branch, merges it, and then follows the release steps at the end of this file. Nothing is published without that review.
+What it reviews:
 
-One limit: Anthropic's cost charts are images. The weekly session can read prices, tables and documentation, but it can only use chart points that are stated in text, for example in a system card. When it cannot read a chart, it says so, and a person supplies the readings.
+- New, changed or retired Claude models, with their release posts and system cards.
+- Prices, plan limits and usage credit rules.
+- How Claude Code chooses models and effort, from its documentation and release notes.
+- New evidence on the current models, such as independent benchmark results by effort level.
+- The open questions listed in `evidence.md`, to close any that can now be answered.
+- Open issues on the repository.
+
+What happens next depends on what it finds:
+
+1. **Nothing that changes a pick, a price, a rule, a setup step or a stated fact.** It sets the review dates to that day, bumps the third version number, adds a one-line changelog entry and publishes. This date-only release needs no approval. Before pushing, it checks that nothing but the dates, the version and the changelog line differs.
+2. **Something changed.** The drafter updates the plugin on a branch named `update/` followed by the date, using the procedure below. The auditor checks every changed claim against its source. The test questions are run. Then the session sends the owner a short summary and one question: publish, do not publish, or change something first.
+3. **The owner accepts.** The same session merges the branch into `main`, sets the version in the marketplace repository, and pushes both. No other steps are needed. It cannot push tags, so a tag is optional and done by hand.
+
+No change to the guidance is published without the owner's yes.
+
+One limit: Anthropic's cost charts are images. The weekly session can read prices, tables and documentation, but it can only use chart points that are stated in text, for example in a system card. When it cannot read a chart, it says so in the summary, and the owner supplies screenshots in the same session.
 
 ## Where each fact lives
 

@@ -160,7 +160,7 @@ Model lineups, prices and published results change every few weeks. The best mod
 - Anthropic changes prices, plan limits or how Claude Code chooses models.
 - New published evidence, or measurements on real work, change which pick is best.
 
-Every change is reviewed by a person before it is published. Every version states the date it was last reviewed. If that date is more than about two months old, or you ask about a model the plugin does not know, Claude will tell you the guidance may be behind.
+Every change to the guidance is reviewed by a person before it is published. In a week with no change, a new version is still published with that week's review date, so the date at the top of this page tells you when the picks were last checked. Every version states the date it was last reviewed. If that date is more than about two months old, or you ask about a model the plugin does not know, Claude will tell you the guidance may be behind.
 
 ### Getting the latest version
 
