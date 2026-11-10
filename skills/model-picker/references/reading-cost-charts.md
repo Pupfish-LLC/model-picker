@@ -29,7 +29,7 @@ Anthropic publishes charts that plot a benchmark score against the cost per task
 
 7. **Allow for noise.** A gap of two or three points is within the normal noise of these benchmarks. Do not build a rule on it alone.
 
-8. **Convert to plan terms.** Dollars per task are a stand-in. On a subscription what matters is which weekly limit the work draws on and how full it is.
+8. **Convert to plan terms.** Dollars per task are a stand-in. On a subscription what matters is how fast the work draws on the weekly limit and how full that limit is. Fable draws on the same weekly limit as the other models and uses it faster, by an amount Anthropic has not published (see `plans-and-costs.md`, section 3).
 
 ## Placing a new model
 

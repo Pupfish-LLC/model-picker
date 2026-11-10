@@ -83,15 +83,21 @@ For a project with several kinds of work, you get a small table with one row per
 
 The right pick depends on how you pay, so Claude may ask one question:
 
-- **Your plan has its own weekly Fable allowance** (Max and Ultra at the time of writing). Fable work does not draw down your general limit, so Fable 5.2 at medium effort becomes the default for substantial work.
-- **You pay per token.** Fable 5.2 at medium costs about the same per task as Opus 5.5 at high, so the same picks apply where Fable is offered.
-- **Fable shares your weekly limit, costs extra, or is not available.** Opus 5.5 at high is the default, with Fable saved for the hardest work.
+1. **Fable is included in your plan's weekly limit.** This is Max, Ultra, and premium seats on Team and on legacy seat-based Enterprise plans. Fable can use up to 50 percent of your weekly limit. It draws on the same weekly limit as the other models and uses it faster, so it is not a separate allowance. Fable 5.2 at medium effort is the default for substantial work.
+2. **You pay per token.** This is a key from the Claude Console, a cloud provider, or a usage-based Enterprise plan. Fable 5.2 at medium costs about the same per task as Opus 5.5 at high, so the same picks apply where Fable is offered.
+3. **Fable bills to usage credits, or is not available.** This is Pro, and standard seats on Team and on legacy seat-based Enterprise plans. It also applies when your Fable share is used up, under zero data retention, and where an Enterprise admin has not turned Fable on. Opus 5.5 at high is the default, with Fable saved for the hardest work. If you choose to pay for Fable with usage credits, you pay per token for that work, so case 2 applies to it.
 
-If you are not sure, look at your usage page. A separate weekly limit labeled Fable means the first case.
+Launch week only: until 2026-11-16 at 11:59 pm Pacific time, Pro plans and standard Team seats have Fable included for up to 50 percent of their weekly limit. They stay in case 3 that week. After it, expect Fable to bill to usage credits.
+
+If you are not sure, open the `/model` picker in Claude Code. "Requires usage credits" on the Fable row means the third case. So does a Fable row that is missing or grayed out. No such label, together with a Fable bar on your usage page, means the first. On Pro and standard Team seats this check may not work during the launch week, so go by your plan name.
+
+The Free plan is outside these picks. It has no Opus, no Fable and no Claude Code.
+
+The plan rules are from Anthropic's help pages, the Free plan facts from its plan pricing page, and the `/model` label from the Claude Code documentation. They were read on 2026-11-09. The sources are in [`plans-and-costs.md`](skills/model-picker/references/plans-and-costs.md).
 
 ## The picks at a glance
 
-| The work | With a Fable allowance | Without |
+| The work | Cases 1 and 2 (Fable profile) | Case 3 (Opus profile) |
 | --- | --- | --- |
 | Highest stakes, where a wrong answer would be silent and costly | Fable 5.2, xhigh | Opus 5.5, xhigh |
 | Substantial building and coding with tests | Fable 5.2, medium | Opus 5.5, high |
@@ -146,7 +152,7 @@ Please keep these limits in mind:
 
 - **These are vendor figures, not measurements on your work.** They are a well-supported starting point. If a choice matters to you, measure it on your own tasks.
 - **Chart readings are approximate.** Gaps of two or three points between two picks are within normal noise.
-- **One pick goes further than Anthropic's advice.** Anthropic suggests starting most work on Opus 5.5 and moving up to Fable for the most ambitious work. This plugin makes Fable 5.2 at medium the default for substantial building when you have a Fable allowance or pay per token, because Anthropic's own cost charts show it scoring about level with or slightly above Opus 5.5 at high for about the same cost. If you prefer Anthropic's advice as given, use the "without" column.
+- **One pick goes further than Anthropic's advice.** Anthropic suggests starting most work on Opus 5.5 and moving up to Fable for the most ambitious work. This plugin makes Fable 5.2 at medium the default for substantial building when Fable is included in your plan or you pay per token, because Anthropic's own cost charts show it scoring about level with or slightly above Opus 5.5 at high for about the same cost per task. That cost is in dollars. On a plan that includes Fable, Fable work draws on your one weekly limit faster than the other models do, and Anthropic has not published how much faster, so watch your usage page. If you prefer Anthropic's advice as given, use the case 3 column.
 - **Plan rules change often** and some are not published. The plugin says which ones it could not confirm.
 - **It only covers Claude models.**
 

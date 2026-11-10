@@ -188,9 +188,9 @@ What this means for picking:
 | Pick | Evidence | Strength |
 | --- | --- | --- |
 | Fable 5.2, xhigh for highest stakes | Top FrontierCode 2.0 score (49.1%), 3.6 points above Opus 5.5's best for about 11 percent more cost per task. Leads most rows of the release table | Strong. Published |
-| Fable 5.2, medium as the default | About level with or slightly above Opus 5.5 at high for about the same cost on FrontierCode 2.0. Matches Opus's top score on search and beats it on chart reading at medium. Low to medium is the cheapest step on the chart | Moderate. Rests partly on a chart reading and a gap within noise. Anthropic itself advises starting on Opus 5.5 |
+| Fable 5.2, medium as the default | About level with or slightly above Opus 5.5 at high for about the same cost on FrontierCode 2.0. Matches Opus's top score on search and beats it on chart reading at medium. Low to medium is the cheapest step on the chart | Moderate. Rests partly on a chart reading and a gap within noise. Anthropic itself advises starting on Opus 5.5. The comparison is in dollars per task. On a plan that includes Fable, Fable draws the shared weekly limit faster than Opus by an amount Anthropic has not published, so what this pick costs in plan allowance is not known |
 | Fable 5.2, high as the step up | About level with Opus 5.5 at max for about half the cost per task | Strong. Published |
-| Opus 5.5, high as the default without Fable, and for review and coordination | A good step on both cost charts (about $0.15 to $0.16 a point). Keeps work on the general limit | Moderate. Chart readings on two benchmarks that agree |
+| Opus 5.5, high as the default without Fable, and for review and coordination | A good step on both cost charts (about $0.15 to $0.16 a point). On a plan that includes Fable, Opus draws the shared weekly limit more slowly than Fable (published by Anthropic, without a figure) | Moderate. Chart readings on two benchmarks that agree |
 | Opus 5.5, xhigh for audits | +8.9 points over high on FrontierCode 2.0 at about $0.31 a point | A judgment call. Terminal-Bench 4.0 shows little gain from the same step |
 | Sonnet 5.5, medium for scoped work | Cheapest point on Terminal-Bench 4.0's best value line. Half Opus's price on every line. Anthropic describes medium as good for scoped engineering work | Moderate |
 | Sonnet 5.5, high for research | Nearly level with Opus 5.5 on both knowledge-work Elo scores at half the price. Effort buys more reading and checking, which is what research needs | Moderate. The cost of each effort level on knowledge work has not been read from a chart |
@@ -224,12 +224,17 @@ What this means for picking:
 
 ## 11. Open questions
 
-- How large the weekly Fable allowance is on each plan, and whether Fable work also counts against the general limit.
-- What a Fable limit reset clears.
-- How the general limit weighs Opus, Sonnet and Haiku tokens against each other.
+- How much faster Fable draws the shared weekly limit than Opus. This is not published. Anthropic says only that Fable models use plan limits "faster than other Claude models". Until it is known, the Fable default cannot be priced in plan allowance, only in dollars per task.
+- How the weekly limit weighs Opus, Sonnet and Haiku tokens against each other.
 - Sonnet 5.5's knowledge-work cost by effort, which would settle high against medium for research.
 - Haiku 5.5's cost by effort from Anthropic's own charts.
 - Whether these vendor figures hold on the user's own work. This is the one that matters most.
+
+Closed at the 2026-11-09 review. The details and sources are in `plans-and-costs.md`, section 3.
+
+- How large the weekly Fable allowance is. Answer: up to 50 percent of the weekly limit, on plans and seats that include Fable (published by Anthropic, re-verified).
+- Whether Fable work also counts against the general limit. Answer: yes. Fable draws from the same weekly limit as the other models. It is not a separate pool (published by Anthropic, re-verified).
+- What a Fable limit reset clears. Answer: the usage spent on Fable models against the weekly limit, and the whole five-hour window where the account has one. Usage on other models stays (published by Anthropic, re-verified 2026-11-09).
 
 ## 12. Sources
 
@@ -238,9 +243,18 @@ What this means for picking:
 - Anthropic, Introducing Claude Sonnet 5.5 (2026-09-28): https://www.anthropic.com/news/claude-sonnet-5-5
 - Anthropic, Introducing Claude Haiku 5.5 (2026-10-07): https://www.anthropic.com/claude-haiku-5-5
 - Anthropic, pricing: https://platform.claude.com/docs/en/about-claude/pricing (read 2026-11-09)
+- Anthropic help center, Claude Fable models on your plan: https://support.claude.com/en/articles/15424964 (read 2026-11-09, re-verified 2026-11-09)
+- Anthropic help center, Claude Fable 5.2 launch offers: https://support.claude.com/en/articles/17506494 (read 2026-11-09, re-verified 2026-11-09)
+- Anthropic help center, Use Claude Code with your Pro, Max, or Ultra plan: https://support.claude.com/en/articles/11145838 (read 2026-11-09, first from a summary, then in full)
+- Anthropic help center, Manage usage credits for paid Claude plans: https://support.claude.com/en/articles/12429409 (read 2026-11-09)
+- Anthropic, plan pricing page: https://claude.com/pricing (read 2026-11-09, first from a summary, then in full)
 - Anthropic, Choosing a Claude model and effort level in Claude Code (2026-07-07): https://claude.com/blog/claude-model-and-effort-level-in-claude-code
 - Anthropic, The advisor strategy (2026-04-09): https://claude.com/blog/the-advisor-strategy
-- Claude Code documentation, model configuration: https://code.claude.com/docs/en/model-config (read 2026-11-09, not yet updated for Fable 5.2)
+- Claude Code documentation, model configuration: https://code.claude.com/docs/en/model-config (read 2026-11-09, re-verified 2026-11-09. It now covers Fable 5.2)
+- Claude Code documentation, subagents: https://code.claude.com/docs/en/sub-agents (read 2026-11-09)
+- Claude Code documentation, the advisor: https://code.claude.com/docs/en/advisor (read 2026-11-09)
+- Claude Code documentation, prompt caching: https://code.claude.com/docs/en/prompt-caching (read 2026-11-09)
+- Anthropic, Claude Platform release notes: https://platform.claude.com/docs/en/release-notes/overview (read 2026-11-09)
 - Claude Code documentation, costs: https://code.claude.com/docs/en/costs (read 2026-11-09)
 - Third party, Kingy AI, Fable 5.2 specifications and system-card cost figures: https://kingy.ai/blog/claude-fable-5-2/ (read 2026-11-09)
 - Third party, DataCamp, Haiku 5.5 table: https://www.datacamp.com/blog/claude-haiku-5-5

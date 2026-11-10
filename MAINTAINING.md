@@ -112,7 +112,7 @@ Ask each of these in a fresh session with the plugin loaded and check the answer
 | Question | Expected |
 | --- | --- |
 | "I have a Max plan. Which model should I use to build a new import module for our reporting tool? There are tests." | Fable 5.2 at medium, with high as the step up. Review on Opus 5.5 |
-| "I'm on Pro. Same question." | Opus 5.5 at high. Notes that Fable may share the limit or cost extra |
+| "I'm on Pro. Same question." | Opus 5.5 at high. Notes that Fable on Pro bills to usage credits |
 | "Which model for writing the specification another agent will build from? A mistake would not be noticed for weeks." | Fable 5.2 at xhigh (or Opus 5.5 at xhigh without Fable), plus a check by a different model |
 | "I need to rename a config key in twelve files. The tests cover it." | Sonnet 5.5 at medium |
 | "Find where the retry limit is set in this repository." | Haiku 5.5 at low, or no agent at all if one search will do |
