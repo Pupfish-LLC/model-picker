@@ -4,7 +4,7 @@ All notable changes to the `model-picker` plugin are recorded here. Each entry s
 
 Version numbers:
 
-- **First number** changes when a pick in the lineup changes for a common kind of work.
+- **First number** changes when a pick in the lineup changes for a common kind of work, or when the way the picker decides changes, such as the payment situations it asks about.
 - **Second number** changes when a model is added, or evidence or rules are updated without changing the common picks.
 - **Third number** changes for corrections and wording, and for each weekly review that found nothing to change. So the third number tells you roughly how many quiet weeks have passed since the guidance last changed.
 

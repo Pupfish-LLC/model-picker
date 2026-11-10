@@ -31,6 +31,7 @@ What it reviews:
 - New evidence on the current models, such as independent benchmark results by effort level.
 - The open questions listed in `evidence.md`, to close any that can now be answered.
 - Open issues on the repository.
+- The way the picker decides, not only what it picks. See "Changes to how the picker decides" below.
 
 What happens next depends on what it finds:
 
@@ -39,6 +40,21 @@ What happens next depends on what it finds:
 3. **The owner accepts.** The same session merges the branch into `main`, sets the version in the marketplace repository, and pushes both. No other steps are needed. It cannot push tags, so a tag is optional and done by hand.
 
 No change to the guidance is published without the owner's yes.
+
+### Changes to how the picker decides
+
+The picker does not only hold facts. It has a structure: step 2 of the skill sorts people by how they pay, and each payment situation gets its own column of picks. A change in pricing or plans can leave every recorded number correct and still make that structure wrong. The weekly review checks for this every time by asking three questions.
+
+1. **Do the payment situations still divide people correctly?** Examples that would break them: a new plan or seat type, a plan gaining or losing a separate allowance for a model, a change in which models draw on which limit, a change in how usage credits apply, or a model becoming unavailable on a plan or provider.
+2. **Is there a payment situation the skill does not cover?** For example a new way to buy Claude, or a new discount that only some people get.
+3. **Is there a factor the skill does not weigh that now matters?** Examples: a new effort level or mode, a speed tier, a price that depends on prompt length or time of day, a change to cache or batch pricing large enough to change cost per task, or a new published limit on agents or sessions.
+
+If the answer to any of these is yes, it is never a quiet week, even when no price or score changed.
+
+- The session raises it with the owner first in its summary, in plain words, as "this changes how the picker decides", and states the payment situations as they are now and as proposed.
+- The update covers every place the structure appears: step 2 and the picks table in the skill, `plans-and-costs.md`, and the two matching sections of the readme.
+- It bumps the first version number, because people may need to answer the payment question differently.
+- If it is not clear how the structure should change, the session does not guess. It describes the change and the options, and asks the owner to choose.
 
 ### How quiet weeks are recorded
 
