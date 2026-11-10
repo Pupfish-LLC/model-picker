@@ -139,7 +139,7 @@ A few rules do most of the work:
 
 - Start from the stakes, not from the size of the task.
 - Tests come first. A model's review adds to them.
-- Have work reviewed by a different model from the one that wrote it, in a fresh session.
+- Have work reviewed in a fresh session, by a different model from the one that wrote it when you can.
 - Do not use the max effort level unless you have tested that it helps on your task.
 - Pick the model at the start of a long session. Switching partway is expensive.
 - Do not start a helper agent for something a single lookup can do.

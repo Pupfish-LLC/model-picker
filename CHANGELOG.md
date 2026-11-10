@@ -30,6 +30,7 @@ No pick changes, so there is nothing to do differently. This release explains ho
 - The word "vendor" is replaced by "Anthropic" wherever it appeared.
 - The readme is shorter. The file listing is removed and the update instructions are condensed.
 - The `NOTICE` file adds one sentence: "That is all that we ask."
+- The readme's rule on review now says "by a different model when you can", to match the picks table, where work built on Opus 5.5 is reviewed by a fresh Opus 5.5 agent.
 
 ## [2.0.0] - 2026-11-09
 
