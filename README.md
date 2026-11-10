@@ -209,6 +209,6 @@ Released under the [Apache License, Version 2.0](LICENSE). You are free to use i
 
 ## Author
 
-[Pupfish Analytics](https://pupfish.io)
+Built by [Pupfish Analytics](https://pupfish.io). Part of the [Pupfish Claude Marketplace](https://github.com/Pupfish-LLC/claude-plugins).
 
 This plugin is not affiliated with or endorsed by Anthropic. Claude and the model names are trademarks of Anthropic.
