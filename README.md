@@ -53,6 +53,8 @@ Anyone who uses Claude for real work and wants good results without wasting mone
 
 ## How to use it
 
+### In a conversation
+
 Just ask in plain words. There is nothing to memorize.
 
 - "Which model should I use to refactor this billing module?"
@@ -65,7 +67,7 @@ Just ask in plain words. There is nothing to memorize.
 
 You can also call it directly with `/model-picker`.
 
-### What an answer looks like
+What an answer looks like:
 
 ```
 Pick: Sonnet 5.5, medium
@@ -78,23 +80,7 @@ How to set it: /model claude-sonnet-5-5 and /effort medium at the start
 
 For a project with several kinds of work, you get a small table with one row per role.
 
-### The first thing it needs to know
-
-The right pick depends on how you pay, so Claude may ask one question:
-
-1. **Fable is included in your plan's weekly limit.** This is Max, Ultra, and premium seats on Team and on legacy seat-based Enterprise plans. Fable can use up to 50 percent of your weekly limit. It draws on the same weekly limit as the other models and uses it faster, so it is not a separate allowance. Opus 5.5 at high effort is the default for substantial work. Fable 5.2 is kept for the highest-stakes work, and for building work where Opus 5.5 clearly tried and was still wrong.
-2. **You pay per token.** This is a key from the Claude Console, a cloud provider, or a usage-based Enterprise plan. Fable 5.2 at medium costs about the same per task as Opus 5.5 at high, so Fable 5.2 at medium is the default for substantial work where Fable is offered.
-3. **Fable bills to usage credits, or is not available.** This is Pro, and standard seats on Team and on legacy seat-based Enterprise plans. It also applies when your Fable share is used up, under zero data retention, and where an Enterprise admin has not turned Fable on. Opus 5.5 at high is the default, with Fable saved for the hardest work. If you choose to pay for Fable with usage credits, you pay per token for that work, so case 2 applies to it.
-
-Launch week only: until 2026-11-16 at 11:59 pm Pacific time, Pro plans and standard Team seats have Fable included for up to 50 percent of their weekly limit. They stay in case 3 that week. After it, expect Fable to bill to usage credits.
-
-If you are not sure, open the `/model` picker in Claude Code. "Requires usage credits" on the Fable row means the third case. So does a Fable row that is missing or grayed out. No such label, together with a Fable bar on your usage page, means the first. On Pro and standard Team seats this check may not work during the launch week, so go by your plan name.
-
-The Free plan is outside these picks. It has no Opus, no Fable and no Claude Code.
-
-The plan rules are from Anthropic's help pages, the Free plan facts from its plan pricing page, and the `/model` label from the Claude Code documentation. They were read on 2026-11-09. The sources are in [`plans-and-costs.md`](skills/model-picker/references/plans-and-costs.md).
-
-## Using it in a multi-agent build
+### In a multi-agent build
 
 A session that coordinates other agents can use the plugin in two ways. Add one of these to the project's instructions.
 
@@ -111,6 +97,22 @@ While planning, load the model-picker skill and give every work package an agent
 ```
 
 The second needs the [agent files set up](#setting-up-agents-in-claude-code) first. It makes each choice once, in writing, where you can review it.
+
+### The first thing it needs to know
+
+The right pick depends on how you pay, so Claude may ask one question:
+
+1. **Fable is included in your plan's weekly limit.** This is Max, Ultra, and premium seats on Team and on legacy seat-based Enterprise plans. Fable can use up to 50 percent of your weekly limit. It draws on the same weekly limit as the other models and uses it faster, so it is not a separate allowance. Opus 5.5 at high effort is the default for substantial work. Fable 5.2 is kept for the highest-stakes work, and for building work where Opus 5.5 clearly tried and was still wrong.
+2. **You pay per token.** This is a key from the Claude Console, a cloud provider, or a usage-based Enterprise plan. Fable 5.2 at medium costs about the same per task as Opus 5.5 at high, so Fable 5.2 at medium is the default for substantial work where Fable is offered.
+3. **Fable bills to usage credits, or is not available.** This is Pro, and standard seats on Team and on legacy seat-based Enterprise plans. It also applies when your Fable share is used up, under zero data retention, and where an Enterprise admin has not turned Fable on. Opus 5.5 at high is the default, with Fable saved for the hardest work. If you choose to pay for Fable with usage credits, you pay per token for that work, so case 2 applies to it.
+
+Launch week only: until 2026-11-16 at 11:59 pm Pacific time, Pro plans and standard Team seats have Fable included for up to 50 percent of their weekly limit. They stay in case 3 that week. After it, expect Fable to bill to usage credits.
+
+If you are not sure, open the `/model` picker in Claude Code. "Requires usage credits" on the Fable row means the third case. So does a Fable row that is missing or grayed out. No such label, together with a Fable bar on your usage page, means the first. On Pro and standard Team seats this check may not work during the launch week, so go by your plan name.
+
+The Free plan is outside these picks. It has no Opus, no Fable and no Claude Code.
+
+The plan rules are from Anthropic's help pages, the Free plan facts from its plan pricing page, and the `/model` label from the Claude Code documentation. They were read on 2026-11-09. The sources are in [`plans-and-costs.md`](skills/model-picker/references/plans-and-costs.md).
 
 ## The current picks at a glance
 

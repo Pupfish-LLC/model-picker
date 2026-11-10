@@ -20,7 +20,7 @@ No pick changes, so there is nothing to do differently. This release explains ho
 
 ### Added
 
-- The readme has a short section, "Using it in a multi-agent build", with two lines of sample wording for a project's instructions: one to decide as agents are started, and one to give every work package an agent role in the plan.
+- The readme's "How to use it" section now has two parts, "In a conversation" and "In a multi-agent build". The second has two lines of sample wording for a project's instructions: one to decide as agents are started, and one to give every work package an agent role in the plan.
 - The skill has a matching section, "Planning a multi-agent build", so Claude assigns roles in the plan, starts agents by role, checks the agent files against the current picks at the start of each phase, and confirms what ran from the transcript.
 - A test question for a planned build in `MAINTAINING.md`.
 
