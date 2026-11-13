@@ -1,6 +1,6 @@
 # Plans, prices and token costs
 
-Last reviewed 2026-11-09. Plan rules and prices change often. When the answer matters, tell the user to check their own usage page and Anthropic's pricing page.
+Last reviewed 2026-11-12. Plan rules and prices change often. When the answer matters, tell the user to check their own usage page and Anthropic's pricing page.
 
 ## Contents
 
@@ -14,7 +14,7 @@ Last reviewed 2026-11-09. Plan rules and prices change often. When the answer ma
 
 ## 1. Prices per million tokens
 
-List prices in US dollars, from Anthropic's pricing page.
+List prices in US dollars, from Anthropic's pricing page, https://platform.claude.com/docs/en/about-claude/pricing. Read again on 2026-11-12, when every figure below matched.
 
 | Model | Input | Output | Cache write, 5 minutes | Cache write, 1 hour | Cache read | Batch input | Batch output |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -33,20 +33,22 @@ Notes:
 - Fast mode: Fable 5.2 at $16 and $80, Opus 5.5 at $8 and $40. Not available with batch.
 - Batch is half price on input and output.
 - US-only inference costs 1.1 times on every line.
-- Fable 5.2 has a one-million-token context and up to 128,000 output tokens (third party).
+- All four current models have a one-million-token context window and a maximum output of 128,000 tokens (published by Anthropic, models overview, https://platform.claude.com/docs/en/about-claude/models/overview, read 2026-11-12).
 
 ## 2. Price per token against cost per task
 
 - A model that costs twice as much per token can cost less per task if it needs fewer tokens or fewer attempts. Fable 5.2 at high costs about half of Opus 5.5 at max per task on FrontierCode 2.0, despite twice the price per token.
 - Agent work is mostly cache reads. Fable 5.2 and Opus 5.5 charge the same for those, and Sonnet 5.5 half. Token counts worked out from dollar figures are rough for this reason.
 - Fable 5.2 against Fable 5.1 per task on FrontierCode 2.0: cheaper at low and medium, more expensive from high up, despite the lower price per token.
-- Each benchmark has its own cost scale. Opus 5.5 at high costs about $2.4 per task on FrontierCode 2.0 and about $3.9 per attempt on Terminal-Bench 4.0. Only compare costs within one chart.
+- Each benchmark has its own cost scale. Opus 5.5 at high costs about $2.4 per task on FrontierCode 2.0, about $3.9 per attempt on Terminal-Bench 4.0, $1.38 per attempt on Anthropic's internal agentic-coding benchmark and $0.29 per task on its SWE-bench Pro subset. Only compare costs within one chart or table.
+- Anthropic's cost guide (read 2026-11-12) prices the current models per task on several benchmarks. On its SWE-bench Pro subset, Opus 5.5 at xhigh scored level with Fable 5.2 at high for a little over half the cost per solved task. On its internal agentic-coding benchmark, Fable 5.2 at medium and Opus 5.5 at high cost about the same per attempt and scored about the same. The tables are in `evidence.md`, section 5.
+- Anthropic's advice in that guide: "Price every candidate in cost per completed task on your own traffic". Where a test can show a failure, running at a lower effort and rerunning only the failures at high cost less than running everything at high on one benchmark.
 
 ## 3. Plan limits
 
 On a subscription the real currency is the plan's allowance, not dollars.
 
-Unless a line says otherwise, the facts in sections 3 and 4 were read on 2026-11-09 and read a second time the same day to check them. A fact that was read only once says so.
+Unless a line says otherwise, the facts in sections 3 and 4 were read on 2026-11-09 and read a second time the same day to check them. A fact that was read only once says so. Help articles 11145838, 12429409, 15424964 and 17506494 were read again on 2026-11-12. Nothing recorded here had changed. What that reading added is marked 2026-11-12.
 
 ### Limits by plan
 
@@ -54,11 +56,13 @@ Source: Anthropic help article 11145838, "Use Claude Code with your Pro, Max, or
 
 | Plan | Limits |
 | --- | --- |
-| Pro | A five-hour session limit and a weekly limit |
-| Max | A five-hour session limit and a weekly limit. Fable can use up to 50 percent of the weekly limit |
+| Pro | A five-hour limit and a weekly limit |
+| Max | A five-hour limit and a weekly limit. Fable can use up to 50 percent of the weekly limit |
 | Ultra | A weekly limit. Fable can use up to 50 percent of it. Verified Ultra accounts have no five-hour limit |
 
 - These limits are shared between the Claude apps and Claude Code.
+- The name. From version 2.1.312 Claude Code's messages call the five-hour window the "5-hour limit" in place of the "session limit" (Claude Code changelog, read 2026-11-12). The help article still says "five-hour session limit". They are the same limit.
+- The wrap-up allowance (help article 11145838, read 2026-11-12). If the five-hour limit is reached while Claude Code is partway through a response, it may keep working briefly to finish the step in progress, and shows a notice that the usage limit is reached and it is wrapping up. The allowance is small and capped, and the usage counts toward the weekly limit. It does not cover a new message. On Pro it applies up to once per weekly period. On Max it can apply each time the five-hour limit is reached. Anthropic says it is rolling out gradually, so an account may not have it yet. It does not change any pick.
 - Team and Enterprise seats have a per-seat allowance on a rolling five-hour window and a weekly window, sized by seat tier (read once, 2026-11-09).
 - The Free plan is outside this lineup. It has no Opus, no Fable, no Claude Code and no usage credits (Anthropic's plan pricing page, https://claude.com/pricing, read 2026-11-09).
 
@@ -76,15 +80,15 @@ Source: Anthropic help article 15424964, "Claude Fable models on your plan", htt
 - The clearest proof is the worked example in help article 17506494 (below): someone who has used 80 percent of the weekly limit, 50 on Fable and 30 on other models, is back at 30 percent after a Fable limit reset.
 - So on an included plan, every piece of Fable work uses up the same weekly limit that Opus, Sonnet and Haiku work draws on, and uses it faster.
 - This is why included plans have their own picks, the Included profile in the skill. Substantial building defaults to Opus 5.5 at high. Fable 5.2 is kept for the highest-stakes work, at xhigh, and, at high, for building work where Opus 5.5 clearly tried and was still wrong. That is the plugin owner's choice, made on 2026-11-09.
-- Help articles 11145838 and 12429409 still say that Max and Ultra have "a separate weekly limit for Fable". That fits the facts above if it means the 50 percent cap, which the usage page shows as its own bar. It does not mean a second pool of usage.
+- Help articles 11145838 and 12429409 still say that Max and Ultra have "a separate weekly limit for Fable" (both still did on 2026-11-12). That fits the facts above if it means the 50 percent cap, which the usage page shows as its own bar. It does not mean a second pool of usage.
 - The plan pricing page agrees (read 2026-11-09). It lists Fable on Max and Ultra as "50% of weekly limits". On Pro it says "Fable, paid with usage credits" on the plan card and "Usage credits" in the comparison table.
 - Versions of this plugin before 2.0.0 treated the Fable limit on Max and Ultra as a separate weekly limit and advised spreading work across the two. The help article says otherwise.
 
 ### The launch week on Pro and standard Team
 
-Source: Anthropic help article 17506494, "Claude Fable 5.2 launch offers", https://support.claude.com/en/articles/17506494. Read 2026-11-09 and re-verified the same day.
+Source: Anthropic help article 17506494, "Claude Fable 5.2 launch offers", https://support.claude.com/en/articles/17506494. Read 2026-11-09 and re-verified the same day. Read again on 2026-11-12, when the offer and its end date were unchanged.
 
-- On Pro plans and standard Team seats, Fable is included for up to 50 percent of weekly limits from the release on 2026-11-09 through 2026-11-16 at 11:59 pm Pacific time. After that 50 percent is used, or once the week ends, Fable on those plans bills to usage credits.
+- On Pro plans and standard Team seats, Fable is included for up to 50 percent of weekly limits from the release on 2026-11-09 through 2026-11-16 at 11:59 pm Pacific time. After that 50 percent is used, or once the week ends, Fable on those plans bills to usage credits, where usage credits are turned on.
 - This confirms the end date that the previous version of this file had only from a third party. The release post says "this week" and gives no date (read once, 2026-11-09).
 - What the usage page and the `/model` picker show on those plans during the launch week was not checked.
 
@@ -108,6 +112,7 @@ Same article, re-verified 2026-11-09.
 
 - How plans weigh models against each other inside the weekly limit. Anthropic says only that Fable models use the limit "faster than other Claude models".
 - How much faster Fable draws the weekly limit than Opus. The charts give Fable's cost in dollars per task. What the same work costs in plan allowance is not published.
+- Both were still unpublished on 2026-11-12.
 
 Observed once (Ultra plan, 2026-11-09): the usage page showed "Weekly, all models" and "Weekly, Fable" as two bars that reset together. About 38,000 tokens of Fable work moved neither bar by a whole percent. Read together with the help article, the Fable bar tracks Fable's capped share of the one weekly limit. It is not a second allowance.
 
@@ -120,8 +125,9 @@ Practical advice:
 
 ## 4. Usage credits and fast mode
 
-- Usage credits bill at standard API rates, which are the per-token prices in section 1 (Anthropic help article 12429409, "Manage usage credits for paid Claude plans", https://support.claude.com/en/articles/12429409, read once on 2026-11-09).
+- Usage credits bill at standard API rates, which are the per-token prices in section 1 (Anthropic help article 12429409, "Manage usage credits for paid Claude plans", https://support.claude.com/en/articles/12429409, read on 2026-11-09 and again on 2026-11-12).
 - With usage credits switched on, work continues past a plan limit and is billed that way. Switch them off unless that is wanted.
+- Usage credits bought on or after 2026-12-07 generally expire 12 months after the purchase date, and unused credits are then removed from the balance. Credits bought before that date do not expire. Expiry dates differ in some jurisdictions and are shown on the Usage page in Settings (help article 12429409, read 2026-11-12).
 - Where Fable bills to usage credits (section 3), the `/model` picker in Claude Code shows "Requires usage credits" on the Fable row. In an interactive session Claude Code can also show a consent prompt (Claude Code model configuration documentation).
 - A user who sees either is on the Opus profile unless they choose to pay. Someone who chooses to pay for Fable with usage credits pays per token for that work, so situation 2 and the Fable profile apply to it.
 - Through `claude -p`, which runs one prompt without an interactive session, Claude Code never asks. It bills Fable to usage credits where the plan needs them. In an application built on the Agent SDK, Anthropic's kit for building agents in code, whether the consent prompt appears is up to that application. If it does not show the prompt, the same applies (same documentation).
@@ -145,7 +151,7 @@ Breaks the cache:
 
 Keeps the cache:
 
-- **Changing effort** on Fable 5.1 and later, Opus 5.5, Sonnet 5.5 and Haiku 5.5, when signed in with a Claude subscription or a Claude Platform key (Claude Code prompt caching documentation, https://code.claude.com/docs/en/prompt-caching, read twice on 2026-11-09). This now covers Fable 5.2. Changing effort still breaks the cache on other models, on Amazon Bedrock and Google Cloud, through a Claude apps gateway (the documentation's term), under a configuration for HIPAA, the United States health privacy law, and when `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` is set. Microsoft Foundry is not in that list, so check before relying on either behavior there.
+- **Changing effort** on Fable 5.1 and later, Opus 5.5, Sonnet 5.5 and Haiku 5.5, when signed in with a Claude subscription or a Claude Platform key (Claude Code prompt caching documentation, https://code.claude.com/docs/en/prompt-caching, read twice on 2026-11-09 and checked again on 2026-11-12). This covers Fable 5.2. Changing effort still breaks the cache on other models, on Amazon Bedrock and Google Cloud, through a Claude apps gateway (the documentation's term), under a configuration for HIPAA, the United States health privacy law, and when `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` is set. Microsoft Foundry is not in that list, so check before relying on either behavior there.
 - Turning the advisor on or off.
 - Starting a subagent. It has its own separate cache.
 - Loading a skill, entering plan mode, editing files.
@@ -158,6 +164,8 @@ Cache lifetime:
 | Subagents and other background requests | Five minutes | Five minutes |
 
 - To give a subagent a one-hour cache, set `experimental.cacheTtl: 1h` in its agent file, or the `subagentPromptCacheTtl` setting. A one-hour cache costs more to write, so it only pays for agents that pause for more than five minutes between turns.
+
+Outside Claude Code. The lists above describe Claude Code. In an application that calls the Claude Platform directly, changing the top-level effort setting in the middle of a conversation does invalidate the cache. In Anthropic's test it cost 20 to 40 times what the same change cost when sent inside a message, a newer option that is in beta. So when comparing effort levels through the Claude Platform, run each level in a separate session (Anthropic's cost guide, https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence, read 2026-11-12).
 
 ## 6. Token overhead of agents
 

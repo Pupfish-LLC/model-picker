@@ -12,7 +12,74 @@ Version numbers:
 
 The guidance is reviewed in full every week. In a week where nothing needed to change, only the review date and the version move. Those weeks are listed on the one line below, with the version published that week, and get no entry of their own.
 
-Since 2.0.1: none yet.
+Since 2.1.0: none yet.
+
+## [2.1.0] - 2026-11-12
+
+No pick changes. The one thing to check is that your own agent files set an `effort:` line, as the last bullet below explains. This release adds a large set of figures that Anthropic published, records honestly where they support the picks and where they do not, and updates how Claude Code chooses effort for subagents.
+
+### Should you change what you use?
+
+- **No.** Every pick in the table is the same as in 2.0.1, and so are the eight agent templates.
+- **If you pay per token, know that the building default is a close call.** Fable 5.2 at medium and Opus 5.5 at high are level in score and cost on two coding benchmarks. Two others point different ways. Claude now names Opus 5.5 at high as the close alternative when it gives that pick.
+- **If you want to spend less on building, Anthropic's own advice is now more specific.** It is to start on Opus 5.5 at medium and rerun only the failures at high. On Anthropic's figures that costs less than running everything at high, where tests reliably show a failure. The plugin still picks high, and now says that this goes beyond Anthropic's advice and why.
+- **If your agent files set no `effort:` line, add one.** From Claude Code 2.1.317 an agent on a different model from the session runs at that model's saved effort level or its default, which may not be the level you want. The templates in this plugin already set it.
+
+### Added: Anthropic's cost guide
+
+Anthropic's page "Optimizing for cost and intelligence" was read on 2026-11-12. It publishes scores and costs by effort level for the current models on several benchmarks. `evidence.md` has a new section 5 with the tables, each figure labeled with its source, its unit and whether it is a single run.
+
+- On Anthropic's subset of SWE-bench Pro, Opus 5.5 solved 92.8% of tasks at medium for $0.21 per task, 95.3% at high for $0.29, and 96.7% at xhigh for $0.74 (a single run). Fable 5.2 at high solved 96.3% for $1.39 per solved task. Anthropic's reading is that Opus 5.5 at xhigh is level with Fable 5.2 at high for a little over half the cost.
+- On Anthropic's internal agentic-coding benchmark, Fable 5.2 at medium scored 88.9% for $1.34 per attempt (a single run) and Opus 5.5 at high scored 88.4% for $1.38.
+- On a research benchmark, DeepResearch Bench II, Sonnet 5.5 at high was the cheapest setting run. Opus 5.5 at medium scored 2.4 points higher for 1.5 times the cost. Fable 5.2 scored no higher than either.
+- Haiku 5.5 at medium now has published cost figures.
+- Running at a lower effort and rerunning only the failures at high cost less than everything at high on the SWE-bench Pro subset. This is Anthropic's calculation from its runs, not a separate run.
+
+### Reviewed and left unchanged
+
+Each pick was checked against the new figures, using the rule that a pick changes only when another choice beats it at the same cost or matches it for less.
+
+- **Fable 5.2 at medium for building when you pay per token.** Not changed. The new figures back it on one benchmark and point the other way on cost on another, where Fable 5.2 at medium was not run. Its evidence is now rated "moderate, and close".
+- **Fable 5.2 at high as the step up when you pay per token.** Not changed. Its evidence is now rated moderate, down from strong. Against Opus 5.5 at xhigh the two are close.
+- **Opus 5.5 at high for building, review and coordination.** Not changed. High scored above medium on all five benchmarks that show both, by about 2 to 7 points for about 20 to 65 percent more cost per task. The gain on the three published benchmarks is about 2 points.
+- **Fable 5.2 at xhigh for the highest stakes.** Not changed. One caveat is recorded: on the research benchmark Fable 5.2 scored no higher than Opus 5.5.
+- **Sonnet 5.5 and Haiku 5.5 picks.** Not changed. The new figures support Sonnet 5.5 at high for research and Haiku 5.5 at medium for narrow work. They also show Sonnet 5.5 at medium failing much more often than high on open-ended coding, so that pick stays limited to scoped changes with a check.
+
+Five open questions are added to `evidence.md` for these, and two older ones are marked as partly answered.
+
+### Changed in the skill
+
+- The paragraph on why the profiles differ now gives the new evidence for and against the pay-per-token default, and tells Claude to name Opus 5.5 at high as the close alternative.
+- A new paragraph says where the building picks go beyond Anthropic's advice, which names Opus 5.5 at medium as the starting point, and describes Anthropic's approach for people who prefer it.
+- The delegation section notes the 2.1.317 change to subagent effort.
+
+### Updated facts
+
+- Claude Code, in `claude-code-setup.md`, from the Claude Code changelog read on 2026-11-12:
+  - From 2.1.317, a subagent or teammate on a different model from the main conversation uses that model's saved effort level or its default, not the session's level. This answers a gap the previous version listed as not stated.
+  - From 2.1.316, the `CLAUDE_CODE_SUBAGENT_EFFORT` environment variable sets the effort subagents run at when nothing else names one. Its exact place in the order is not confirmed.
+  - The documentation pages had not caught up with either change on 2026-11-12, so the changelog is the only source for them.
+- Also in `claude-code-setup.md`: effort levels are saved per model. By default 20 subagents can run at once, and subagents can nest three layers deep. A saved Fable 5.1 choice moves on Ultra as well as Pro and Max. The advisor note now cites Anthropic's published figures.
+- Plans, in `plans-and-costs.md`, from Anthropic's help pages read on 2026-11-12:
+  - Usage credits bought on or after 2026-12-07 generally expire after 12 months.
+  - A wrap-up allowance lets Claude Code finish the step in progress when the five-hour limit is reached. It is rolling out gradually.
+  - Claude Code now calls the five-hour window the "5-hour limit".
+  - The launch offer on Pro and standard Team seats is unchanged and still ends on 2026-11-16.
+- Prices were read again and every figure matched. The 128,000-token output limit is now sourced to Anthropic and applies to all four models.
+- `reading-cost-charts.md`: it now carries a review date like the other reference files. Three cautions added, on cost per task against cost per solved task, on benchmarks near their ceiling and on single runs. The price-per-point thresholds now carry a note that they do not transfer to benchmarks where a task costs cents.
+- `MAINTAINING.md`: the expected answer to the pay-per-token test question now names Opus 5.5 at high as the close alternative.
+
+### Not changed
+
+- Every pick, the payment situations, the eight agent templates, the model IDs and the prices.
+- The rules that decide close calls.
+
+### Known gaps
+
+- Fable 5.2 at medium has no published figure on the SWE-bench Pro subset, and its figure on the internal agentic-coding benchmark is a single run. So the pay-per-token building default cannot be settled from published evidence.
+- Whether to make "start lower and rerun the failures at high" a rule is undecided. The saving is published for one benchmark only.
+- How much faster Fable uses the shared weekly limit than Opus, and how plans weigh the other models against each other, were still unpublished on 2026-11-12.
+- The exact order between `CLAUDE_CODE_SUBAGENT_EFFORT` and a model's saved effort level was not tested.
 
 ## [2.0.1] - 2026-11-09
 

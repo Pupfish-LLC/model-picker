@@ -113,7 +113,7 @@ Ask each of these in a fresh session with the plugin loaded and check the answer
 | Question | Expected |
 | --- | --- |
 | "I have a Max plan. Which model should I use to build a new import module for our reporting tool? There are tests." | Opus 5.5 at high. If it skipped checks or stopped early, xhigh. If it tried and was still wrong, Fable 5.2 at high. Review on a fresh Opus 5.5 agent, leaning on tests |
-| "I pay per token through the Claude Console. Which model should I use to build a new import module? There are tests." | Fable 5.2 at medium, with high as the step up. Review on Opus 5.5 |
+| "I pay per token through the Claude Console. Which model should I use to build a new import module? There are tests." | Fable 5.2 at medium, with high as the step up. Review on Opus 5.5. Names Opus 5.5 at high as the close alternative |
 | "I'm on Pro. Same question." | Opus 5.5 at high. Notes that Fable on Pro bills to usage credits |
 | "Which model for writing the specification another agent will build from? A mistake would not be noticed for weeks." | Fable 5.2 at xhigh (or Opus 5.5 at xhigh without Fable), plus a check by a different model |
 | "I need to rename a config key in twelve files. The tests cover it." | Sonnet 5.5 at medium |

@@ -1,5 +1,7 @@
 # How to read a score against cost chart
 
+Last reviewed 2026-11-12.
+
 Anthropic publishes charts that plot a benchmark score against the cost per task for each model at each effort level. This is the method used to turn those charts into picks. Use it when a new model or a new chart appears, or when the user wants to see the reasoning.
 
 ## The method
@@ -12,6 +14,7 @@ Anthropic publishes charts that plot a benchmark score against the cost per task
    - Under about $0.50 a point: a good buy.
    - Above about $2 a point: rarely worth it.
    - A step that lowers the score: never.
+   - These thresholds were set on charts where a task costs dollars. On a benchmark where a task costs cents, every step looks cheap by them. There, compare how many times the cost rises with the points gained.
 
 4. **Compare only within one chart.** Each benchmark has its own cost scale. To compare two models that never share a chart, go through a model that both charts show, and treat the result as rough.
 
@@ -43,4 +46,7 @@ Do not place a model from its name, its tier or the maker's adjectives. Place it
 - Comparing scores across benchmark versions. A new version usually changes the tasks and the grading.
 - Reading a release table as if every score were at the same effort. Tables usually show each model's highest effort, which is rarely the effort worth paying for.
 - Treating price per token as cost per task.
+- Mixing cost per task with cost per solved task. The first counts every attempt. The second divides the spend by the tasks that passed, so it is higher, and the gap grows as the pass rate falls.
+- Reading much into a benchmark near its ceiling. When every strong model scores above 90 percent, the benchmark shows cost differences more clearly than differences in capability.
+- Treating a single run as settled. Anthropic's tables say which points are one run.
 - Treating a chart reading as exact. Log-scale axes make small reading errors large.

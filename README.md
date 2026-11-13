@@ -2,7 +2,7 @@
 
 > **Use the right Claude model for the job.** Ask Claude which model and effort level a piece of work needs, and get one clear pick with the reason behind it.
 
-Current as of **2026-11-09**. Covers Claude Fable 5.2, Opus 5.5, Sonnet 5.5 and Haiku 5.5.
+Current as of **2026-11-12**. Covers Claude Fable 5.2, Opus 5.5, Sonnet 5.5 and Haiku 5.5.
 
 The best model choices are reevaluated every week, so [update the plugin](#how-it-stays-current) now and then to get the latest picks.
 
@@ -112,7 +112,7 @@ If you are not sure, open the `/model` picker in Claude Code. "Requires usage cr
 
 The Free plan is outside these picks. It has no Opus, no Fable and no Claude Code.
 
-The plan rules are from Anthropic's help pages, the Free plan facts from its plan pricing page, and the `/model` label from the Claude Code documentation. They were read on 2026-11-09. The sources are in [`plans-and-costs.md`](skills/model-picker/references/plans-and-costs.md).
+The plan rules are from Anthropic's help pages and the `/model` label is from the Claude Code documentation. Both were read on 2026-11-09 and again on 2026-11-12. The Free plan facts are from Anthropic's plan pricing page, read on 2026-11-09. The sources are in [`plans-and-costs.md`](skills/model-picker/references/plans-and-costs.md).
 
 ## The current picks at a glance
 
@@ -146,13 +146,17 @@ A few rules do most of the work:
 
 ## What it is based on, and its limits
 
-The picks come from Anthropic's published release tables and its charts of benchmark score against cost per task, plus the Claude Code documentation. Each number in the plugin is labeled as published by Anthropic, read from a chart, reported by a third party, or observed once in real use.
+The picks come from Anthropic's published release tables, its charts of benchmark score against cost per task and its guide to cost and intelligence, plus the Claude Code documentation and changelog. Each number in the plugin is labeled as published by Anthropic, read from a chart, reported by a third party, or observed once in real use.
 
 Please keep these limits in mind:
 
 - **The figures are Anthropic's own, not measurements on your work.** They are a well-supported starting point. If a choice matters to you, measure it on your own tasks.
 - **Chart readings are approximate.** Gaps of two or three points between two picks are within normal noise.
-- **One pick goes further than Anthropic's advice.** Anthropic suggests starting most work on Opus 5.5 and moving up to Fable for the most ambitious work. For people who pay per token, this plugin makes Fable 5.2 at medium the default for substantial building, because Anthropic's own cost charts show it scoring about level with or slightly above Opus 5.5 at high for about the same cost per task. On a plan that includes Fable, the plugin keeps to Anthropic's advice and defaults to Opus 5.5 at high. There Fable draws on your one weekly limit faster than the other models do, and Anthropic has not published how much faster. Both are the plugin owner's choices. If you pay per token and prefer Anthropic's advice as given, use the case 3 column.
+- **Two picks go further than Anthropic's advice.** Anthropic suggests starting most work on Opus 5.5 at its default effort, medium, and moving up to Fable 5.2 for demanding, long-running work or when Opus 5.5 at higher effort still falls short.
+  - *Fable 5.2 at medium when you pay per token.* The plugin makes it the default for substantial building, because on two coding benchmarks it scores about level with or slightly above Opus 5.5 at high for about the same cost per task. One of those is a chart reading and the other is a single published run. The choice is close. Two other benchmarks point different ways, so Opus 5.5 at high is a sound alternative.
+  - *High effort for building on Opus 5.5.* The plugin uses high where Anthropic starts at medium. On the five benchmarks that show both, high scored about 2 to 7 points above medium for about 20 to 65 percent more cost per task. The gain is small. If your tests reliably catch failures, and waiting for a second run on those failures is acceptable, Anthropic's own figures on one benchmark favor starting at medium and rerunning only the failures at high.
+  - On a plan that includes Fable, the plugin defaults to Opus 5.5 for building. There Fable draws on your one weekly limit faster than the other models do, and Anthropic has not published how much faster.
+  - These are the plugin owner's choices. To follow Anthropic's advice as given, start on Opus 5.5 at medium.
 - **Plan rules change often** and some are not published. The plugin says which ones it could not confirm.
 - **It only covers Claude models.**
 

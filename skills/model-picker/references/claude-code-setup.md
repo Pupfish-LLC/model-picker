@@ -1,8 +1,16 @@
 # Setting models and effort in Claude Code
 
-Last reviewed 2026-11-09 against the Claude Code documentation. Version numbers below are the minimum Claude Code version for that feature.
+Last reviewed 2026-11-12 against the Claude Code documentation and the Claude Code changelog. Version numbers below are the minimum Claude Code version for that feature.
 
-Facts added or corrected at this review were read on 2026-11-09 and checked a second time the same day. They come from four pages of the Claude Code documentation:
+Facts added at the 2026-11-12 review come from these sources, each read that day:
+
+- The Claude Code changelog on GitHub, https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md, published by Anthropic. The newest version listed was 2.1.323. It is the source for the effort an agent on another model runs at (2.1.317), the `CLAUDE_CODE_SUBAGENT_EFFORT` variable (2.1.316) and the header fix in 2.1.323.
+- Subagents, https://code.claude.com/docs/en/sub-agents, and environment variables, https://code.claude.com/docs/en/env-vars: the limits on running and nested subagents.
+- Model configuration, https://code.claude.com/docs/en/model-config: how effort levels are saved per model, and which plans a saved Fable 5.1 choice moves on.
+
+Where the documentation lags the changelog. On 2026-11-12 the model configuration and subagents pages still said only that the session's effort level "doesn't apply" to an agent on another model, and the environment variables page had no entry for `CLAUDE_CODE_SUBAGENT_EFFORT`. For those two facts the changelog is the only source, and it is one line each. The pages do cover Fable 5.2.
+
+Facts from the 2026-11-09 review were read that day and checked a second time the same day. They come from four pages of the Claude Code documentation:
 
 - Model configuration, https://code.claude.com/docs/en/model-config: minimum versions, short names, the subagent effort rule, `/model` and usage credits, automatic fallback.
 - Subagents, https://code.claude.com/docs/en/sub-agents: the `effort` argument on the call that starts an agent, its limit to subagents that are not forks, and `autoCompactWindow`.
@@ -26,7 +34,7 @@ Facts added or corrected at this review were read on 2026-11-09 and checked a se
 ## 1. The short version
 
 - Set both the model and the effort in an agent file, using the full model ID. Short names such as `opus` move to a new version with each release, sometimes late, so a full ID is the only way to know what will run.
-- Always set the effort. An agent on a different model from the main session does not take the session's effort level.
+- Always set the effort. An agent on a different model from the main session does not take the session's effort level. From 2.1.317 it runs at that model's saved effort level or its default, which may not be the level the pick calls for.
 - When an agent file sets them, do not pass a model or an effort on the call that starts the agent. Both override the file, and the model argument accepts only short names.
 - Check for settings that override every agent before trusting the files.
 - Prove what ran from the transcript, not from what the agent says about itself.
@@ -84,13 +92,20 @@ Effort, first match wins:
 1. The `CLAUDE_CODE_EFFORT_LEVEL` environment variable.
 2. An `effort` passed on the call that starts the agent (2.1.292). It applies to subagents that are not forks. A fork is a subagent that inherits the whole conversation instead of starting fresh.
 3. The `effort:` line in the agent file. It overrides the session's effort level.
-4. With none of these, it depends on the agent's model. An agent on the main conversation's model runs at the level picked in the session or set with `--effort`. For an agent on another model, that level does not apply.
+4. With none of these, the fallbacks below apply. Their order against each other is not confirmed.
+   - The `CLAUDE_CODE_SUBAGENT_EFFORT` environment variable (2.1.316). In the changelog's words it sets "the effort level subagents run at when nothing else names one, instead of inheriting the session's".
+   - An agent on the main conversation's model runs at the level picked in the session or set with `--effort`.
+   - An agent on another model does not take the session's level. From 2.1.317 it uses "that model's saved effort level or its default, instead of the session's effort level" (changelog). The same line covers teammates in an agent team.
 
-- The documentation's advice: "To pick a subagent's level, set `effort` in its definition." The passage read does not say which level an agent on another model runs at when nothing sets one. Do not rely on it. Set `effort` in the file and verify from the transcript (section 8).
-- Versions of this file before 2.0.0 said an agent with no effort of its own takes the session's level. That holds only for an agent on the session's own model.
+- What a saved effort level is. Claude Code saves a level for each model, under the `modelSettings` key in the user settings file, when one is confirmed with `/effort` or in the `/model` picker (model configuration documentation). The changelog does not define "its default". The documentation gives medium as the Claude Code default for Fable 5.2, Opus 5.5, Sonnet 5.5 and Haiku 5.5.
+- So an agent file with no `effort:` line can run at a level the user once saved for that model in another session. Do not rely on it. The documentation's advice still holds: "To pick a subagent's level, set `effort` in its definition." Set `effort` in the file and verify from the transcript (section 8).
+- Not confirmed: whether `CLAUDE_CODE_SUBAGENT_EFFORT` is used before or after the model's saved level, and whether it applies to an agent on the session's own model. The changelog's wording, "when nothing else names one", suggests it comes last. It has not been tested.
+- Versions of this file before 2.0.0 said an agent with no effort of its own takes the session's level. That holds only for an agent on the session's own model. Before 2.1.317 the documentation did not say which level an agent on another model ran at.
 - If a model does not support a level, Claude Code uses the highest supported level at or below it.
 
 Agents started by other agents use their own agent file's model and effort (observed).
+
+Two limits apply to a multi-agent build (subagents documentation, read 2026-11-12). By default at most 20 subagents can run at once in a session. Starting another fails until one finishes, and the `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` environment variable changes the number (2.1.217). Sessions with ultracode on are exempt. Ultracode is a Claude Code setting that turns on a workflow mode that starts more agents (section 5). By default a subagent can start subagents of its own, up to three layers below the main conversation. The `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` environment variable changes that, and `1` turns nesting off. There is no limit on the total number of subagents in a session.
 
 Useful front matter fields in an agent file:
 
@@ -113,6 +128,8 @@ Check these before relying on agent files. Look in the environment and in the us
 | Setting | Effect |
 | --- | --- |
 | `CLAUDE_CODE_EFFORT_LEVEL` | Overrides every agent's effort, whether set in the agent file or passed on the call |
+| `CLAUDE_CODE_SUBAGENT_EFFORT` | Sets the effort subagents run at when nothing else names one (2.1.316, from the changelog). By that wording it does not override an `effort:` line in an agent file or an effort passed on the call. Not tested |
+| A saved effort level for a model | From 2.1.317, used for an agent on another model than the session's when nothing else sets its effort. It is saved with `/effort` or the `/model` picker and kept under `modelSettings` in the user settings file |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Used for agents that set no model |
 | `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` | Makes the variable above override every agent's model (2.1.257) |
 | `availableModels` and related allowlist settings | A blocked model is swapped for a permitted one |
@@ -158,6 +175,8 @@ Each request in it records the model that ran. In the maintainer's sessions it r
 
 Do not ask the agent. Agents asked about their own effort gave a number, a guess or "not stated". The transcript was exact every time (observed).
 
+Do not go by the header either on older versions. Before 2.1.323 the fullscreen header could name the session's effort level for a subagent on another model, a level that subagent does not use (changelog).
+
 Transcripts are deleted after 30 days by default.
 
 `claude plugin validate <folder>` and `claude --debug` report agent files that were skipped because of a missing name or front matter that does not parse.
@@ -166,11 +185,12 @@ Transcripts are deleted after 30 days by default.
 
 - `/model <name>` sets the model. `/effort <level>` sets the effort. Do both at the start of a session, because a later model switch rereads the whole conversation at full price.
 - The `model` and `effortLevel` settings set defaults. `effortLevel` accepts low, medium, high and xhigh, not max. Max applies to the current session only.
+- Claude Code saves an effort level for each model, under `modelSettings` in the user settings file. A top-level `effortLevel` in the user settings file does not apply to Opus 5.5 or to models released after it. Those start at their own default until a level is chosen for them with `/effort` or the `/model` picker. A top-level `effortLevel` in project, local or managed settings applies to every model (model configuration documentation, read 2026-11-12).
 - Defaults at the review date: Opus 5.5 is the default model on Pro, Max, Team and Enterprise accounts. Opus 5.5, Sonnet 5.5, Haiku 5.5 and Fable 5.2 default to medium effort in Claude Code. No Fable model is the default on any plan.
 - Do not put a `model:` line in the front matter of a skill used in the middle of a long session. It switches models for that turn and breaks the cache. Hand the work to an agent instead.
 - Minimum versions: Fable 5.2 needs 2.1.321. Fable 5.1 needs 2.1.257 (help article 15424964 says 2.1.255). Opus 5.5 needs 2.1.280, Sonnet 5.5 needs 2.1.284, and Haiku 5.5, including as the `haiku` short name, needs 2.1.293. If `claude-fable-5-2` is not accepted, update Claude Code.
 - Short names from 2.1.321: `fable` resolves to Fable 5.2, except in sessions that go through a Claude apps gateway (the documentation's term). `best` resolves to the same model as `opus`.
-- A saved Fable 5.1 choice moves to Fable 5.2 on Pro and Max the first time 2.1.321 runs. Team and Enterprise accounts wait on their organization's settings. Console accounts, third-party providers, and project, local or managed settings keep `claude-fable-5-1`.
+- A saved Fable 5.1 choice moves to the `fable` short name, and so to Fable 5.2, on Pro, Max and Ultra the first time 2.1.321 or later runs. Team and Enterprise accounts wait on their organization's settings. Console accounts, third-party providers, and project, local or managed settings keep `claude-fable-5-1`. To go back, run `/model claude-fable-5-1` (documentation and changelog, read 2026-11-12).
 - Where Fable bills to usage credits, the `/model` picker shows "Requires usage credits" on the Fable row. Under zero data retention the Fable row stays grayed out with a note. Which plans and seats this applies to is in `plans-and-costs.md`, section 3.
 - In an interactive session Claude Code can show a consent prompt before Fable bills to usage credits. Through `claude -p`, which runs one prompt without an interactive session, it never asks. It bills Fable to usage credits where the plan needs them. In an application built on the Agent SDK, whether the prompt appears is up to that application. If it does not show the prompt, the same applies.
 - A request that a Fable model's safety checks flag, most often on cybersecurity or biology, is run again on an older Opus model: Opus 5 for biology and Opus 4.8 for cybersecurity. The session then stays on that model until the user runs `/model`. That is a model switch, so it breaks the prompt cache.
@@ -187,7 +207,7 @@ The advisor lets the main model consult a second, usually stronger, model at key
 - Turning it on or off does not break the main session's cache.
 - A Fable advisor bills the way Fable does on the user's plan.
 
-A sensible use on the Opus profile: Sonnet 5.5 as the main model with an Opus advisor for long routine builds. There are no published figures for the current models, so treat it as something to test.
+A possible use on the Opus profile: Sonnet 5.5 as the main model with an Opus advisor for long routine builds. Test it before relying on it, and check that the main model consults the advisor at all. Anthropic's cost guide (read 2026-11-12) reports figures for the current models through the Claude Platform's advisor tool, not through Claude Code. There, Sonnet 5.5 at high did not consult an Opus 5.5 advisor on any of 20 coding problems, and Opus 5.5 at high with a Fable 5.1 advisor gained 1.7 points for about 2.1 times the cost. Anthropic's summary: "An advisor can help only when the executor consults it." The figures are in `evidence.md`, section 5.
 
 ## 11. Notes for cloud providers
 

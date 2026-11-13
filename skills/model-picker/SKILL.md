@@ -7,7 +7,7 @@ description: Use for choosing a Claude model and effort level for a task, an age
 
 Pick the Claude model and effort level that fits the work, the stakes and the way the person pays. The aim is the cheapest pick that still gets the work right the first time. A pick that is too large wastes money or plan allowance. A pick that is too small costs more in the end, because failed attempts and rework are not free.
 
-**Last reviewed: 2026-11-09.** Covers Claude Fable 5.2, Opus 5.5, Sonnet 5.5 and Haiku 5.5.
+**Last reviewed: 2026-11-12.** Covers Claude Fable 5.2, Opus 5.5, Sonnet 5.5 and Haiku 5.5.
 
 Every score and cost behind this guidance is Anthropic's published figure or a reading of an Anthropic chart, not a measurement on the user's own work. Treat the picks as a well-supported starting point. When a choice is close, say so, and suggest the user measure on their own work.
 
@@ -59,7 +59,9 @@ The rest is the same on every profile.
 | **Summarize, classify, extract** at volume. Narrow helper jobs | Haiku 5.5, medium |
 | **Read-only search and lookup** | Haiku 5.5, low |
 
-Why the Included and Fable profiles differ. On an included plan Fable shares the one weekly limit and uses it faster than the other models, and Anthropic does not publish by how much. Anthropic's own advice at the Fable 5.2 release is to start most coding and knowledge work on Opus 5.5 and move up to Fable for the most ambitious, open-ended work. So the Included profile spends Fable where it matters most: on the highest-stakes work, and on building work where Opus 5.5 clearly tried and was still wrong. The Fable profile, for people who pay per token, goes a step further than that advice and makes Fable 5.2 at medium the default for substantial building. There the cost is in dollars, and on Anthropic's cost charts Fable 5.2 at medium scores about level with or slightly above Opus 5.5 at high for about the same cost per task (a chart reading). Both are the plugin owner's choices, not Anthropic's. If a user who pays per token prefers Anthropic's advice to the letter, the Opus profile is that advice.
+Why the Included and Fable profiles differ. On an included plan Fable shares the one weekly limit and uses it faster than the other models, and Anthropic does not publish by how much. Anthropic's own advice is to start most work on Opus 5.5 and move up to Fable 5.2 for demanding reasoning and long-horizon agentic work, or when Opus 5.5 at higher effort still falls short. So the Included profile spends Fable where it matters most: on the highest-stakes work, and on building work where Opus 5.5 clearly tried and was still wrong. The Fable profile, for people who pay per token, goes a step further than that advice and makes Fable 5.2 at medium the default for substantial building. There the cost is in dollars, and on two coding benchmarks Fable 5.2 at medium scores about level with or slightly above Opus 5.5 at high for about the same cost per task (one a chart reading, one published by Anthropic from a single run). The choice is close. Two other benchmarks point different ways: Opus 5.5 cost less at a similar pass rate on one, and Fable 5.2 scored higher for about 1.6 times the cost on the other. So for a user who pays per token, name Opus 5.5 at high as the close alternative.
+
+Where the building picks go beyond Anthropic's advice. Anthropic's cost guide (read 2026-11-12) names Opus 5.5 at medium, its default effort, as the starting point for most agent workloads. The picks above use high. On the five benchmarks with figures for both levels, high scored about 2 to 7 points above medium for about 20 to 65 percent more cost per task, and a failed build costs a rerun and a review. The gain is small, and these are the plugin owner's choices, not Anthropic's. A user who prefers Anthropic's advice as given starts on Opus 5.5 at medium, reruns failures at high, and moves to Fable 5.2 only when Opus 5.5 at higher effort still falls short. Where tests reliably catch failures, and waiting for a second run on those failures is acceptable, Anthropic's figures on one benchmark favor that approach on cost.
 
 The evidence for every row is in `references/evidence.md`. Read it when the user asks why, challenges a pick, or the task sits between two rows.
 
@@ -120,7 +122,7 @@ Apply the same picks to your own subagents before you start them.
 
 - Prefer named agents whose files pin a model and effort. If the project has them, use them, and pass no model or effort on the call. Either one overrides the file.
 - If there are none, choose the short model name that matches the pick (`haiku`, `sonnet`, `opus`, `fable`) when starting the agent, and tell the user which you used. Short names move to the newest version with each release and can lag, so they are a stopgap. In Claude Code, `fable` means Fable 5.2 from version 2.1.321.
-- Set the effort too, because the session's level does not carry over to an agent on another model. Use the agent file's `effort:` line, or the `effort` argument on the call that starts the agent where there is one (Claude Code 2.1.292 or later).
+- Set the effort too, because the session's level does not carry over to an agent on another model. From Claude Code 2.1.317 such an agent runs at that model's saved effort level or its default. Use the agent file's `effort:` line, or the `effort` argument on the call that starts the agent where there is one (Claude Code 2.1.292 or later).
 - Do not run a lookup or a log search on the session's expensive model when a small one will do. In Claude Code the built-in helper agents inherit the session's model unless they are replaced.
 - Offer to set up agent files when the user is about to run a multi-agent build without them.
 
